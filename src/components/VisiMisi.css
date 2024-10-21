@@ -1,0 +1,119 @@
+/* Container utama */
+.visimisi-container {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: white;
+  font-family: 'Montserrat', sans-serif;
+}
+
+/* Background image dengan parallax */
+.parallax-background {
+  background-image: url('../../public/images/bg.jpg'); 
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed; /* Efek parallax */
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -3;
+  filter: blur(4px); /* Sedikit blur untuk memberi fokus pada teks */
+}
+
+/* Lapisan overlay gelap dengan gradasi */
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4); /* Layer semi-transparan */
+  z-index: -2;
+}
+
+/* Konten Visi dan Misi */
+.visimisi-content {
+  position: relative;
+  z-index: 1;
+  padding: 20px;
+  max-width: 700px;
+  width: 90%;
+}
+
+/* Fade transition */
+.fade-text {
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+}
+
+.fade-text.fade-in {
+  opacity: 1;
+}
+
+.fade-text.fade-out {
+  opacity: 0;
+}
+
+/* Konten Visi dan Misi */
+.title {
+  color: aliceblue;
+  font-size: 4rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  margin-bottom: 20px;
+  animation: fade-in-title 1s ease forwards;
+}
+
+.description {
+  font-size: 1.5rem;
+  line-height: 1.6;
+  max-width: 80%;
+  margin: 0 auto;
+  animation: fade-in-text 1s ease forwards;
+}
+
+/* Fade-in animation */
+@keyframes fade-in-title {
+  from { opacity: 0; transform: translateY(-30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fade-in-text {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsivitas */
+@media (max-width: 1024px) {
+  .title {
+    font-size: 3rem;
+  }
+  .description {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .title {
+    font-size: 2.5rem;
+  }
+  .description {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .title {
+    font-size: 2rem;
+  }
+  .description {
+    font-size: 0.9rem;
+  }
+}

@@ -1,0 +1,27 @@
+.footer-container {
+  background-color: #f8f8f8; /* Light background for a subtle look */
+  padding: 20px;
+  text-align: center;
+  border-top: 1px solid #ddd; /* Optional border for separation */
+}
+
+.footer-content p {
+  margin: 5px 0;
+  font-size: 14px;
+  color: #555;
+}
+
+.footer-creator {
+  margin-top: 10px;
+  font-size: 12px; /* Smaller font for the creator's credit */
+  color: #888; /* Lighter color to make it subtle */
+}
+
+.footer-creator a {
+  color: #007bff; /* Link color to make it stand out */
+  text-decoration: none;
+}
+
+.footer-creator a:hover {
+  text-decoration: underline; /* Underline on hover for emphasis */
+}
