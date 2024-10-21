@@ -7,7 +7,7 @@ import "./Carousel.css";
 // Fetch carousel data from API
 const fetchCarouselData = async () => {
   const response = await axios.post(
-    "http://localhost:3001/cbn/v1/artikel/getDataByKategori",
+    "http://31.220.6.60:3001/cbn/v1/artikel/getDataByKategori",
     { kategori: 'carousel' },
     {
       headers: {
