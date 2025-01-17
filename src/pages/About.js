@@ -7,7 +7,8 @@ function About() {
 
 
       {/* Hero Section */}
-      <section className="relative py-40 bg-slate-400 flex items-center justify-center bg-fixed bg-center bg-cover text-white"
+      <section
+  className="relative py-10 bg-slate-400 flex items-center justify-center bg-fixed bg-center bg-cover text-white"
   style={{
     backgroundImage: `url('/images/pw.jpg')`,
     transition: 'background-image 1s ease-in-out',
@@ -15,14 +16,19 @@ function About() {
   id="parallax-section"
 >
   <div className="absolute inset-0 bg-black bg-opacity-50"></div>
-  <div className="relative z-0 text-center mx-28">
-    <h1 className="text-8xl font-bold mb-16 text-white ">Christ Bless Nations</h1>
-    <p className="text-3xl mb-6 font-normal">
-    GMS adalah gereja sel yang apostolik dan profetik. Gereja yang dipenuhi oleh rupa-rupa karunia Roh Kudus dan bergerak dalam Amanat Agung untuk menjadikan semua bangsa murid Kristus. Didirikan di tahun 1984 dalam bentuk persekutuan doa, GMS kini telah berkembang menjadi gereja yang bertumbuh cepat ke arah 100.000 jemaat dalam gereja-gereja lokal yang tersebar di seluruh negeri, bahkan sampai ke Asia, Australia, Eropa & Amerika.
+  <div className="relative z-0 text-center mx-6 md:mx-16 lg:mx-28">
+    <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 lg:mb-10 text-white">
+      Christ Bless Nations
+    </h1>
+    <p className="text-sm sm:text-base lg:text-xl mb-6 font-normal leading-relaxed sm:leading-loose">
+      CBN adalah gereja beraliran Kharismatik yang berakar kuat pada kegerakan Karunia Roh Kudus dan Pujian Penyembahan yang mewahyukan hadirat Tuhan. <br/>Berdiri pada tahun 1999, GPPK dimulai dari sebuah persekutuan kecil yang beranggotakan hanya 10-12 jemaat.
+      <br />
+      <br />
+      Hingga hari ini, GPPK CBN tetap teguh pada visi dan misinya: membawa setiap jiwa kepada pengenalan yang mendalam akan Kristus dan memperluas pelayanan hingga ke seluruh pelosok Indonesia. Dengan semangat yang tak pernah padam, GPPK terus menjadi saluran kasih dan kuasa Tuhan, menjangkau mereka yang haus akan kebenaran, dan membangun generasi yang hidup dalam penyembahan sejati dan ketaatan penuh kepada Tuhan.
     </p>
-  
   </div>
 </section>
+
 <section className="relative bg-gray-50 py-16">
   <div className="max-w-7xl mx-auto px-6 lg:px-8">
     {/* Header Section */}
