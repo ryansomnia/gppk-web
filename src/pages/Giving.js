@@ -1,7 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import './Giving.css';
+const images = [
+  '/images/giving.JPG',
+  '/images/bg1.JPG',
+  '/images/bg2.JPG'
+];
+
 
 function Giving() {
+  const [currentImage, setCurrentImage] = useState(0);
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImage((prevImage) => (prevImage + 1) % images.length);
+    }, 3000); 
+
+    return () => clearInterval(interval);
+  }, []);
+
   // Sample data for rotating gallery
   const activities = [
     {
@@ -37,7 +52,15 @@ function Giving() {
 
   return (
     <div className="giving-page">
+       <div className="parallax" 
+      style={{ backgroundImage: `url(${images[currentImage]})` }}>
+      <div className="overlay-content">
+        <h1>MEMBERI</h1>
+        {/* <p>Bagi Jemaat yang tergerak untuk memberi dukungan dana pelayanan kami</p> */}
+      </div>
+    </div>
       <div className="content-wrapper">
+        
         {/* Section 1: Donation Information */}
         <section className="giving-info">
           <h1>Support Our Church</h1>

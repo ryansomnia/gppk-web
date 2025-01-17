@@ -14,8 +14,11 @@ import FormJemaat from "./components/form/FormJemaat";
 
 import './App.css';
 import FormDoa from './components/form/FormDoa';
+import RenunganDetail from './components/RenunganDetail';
+import KKA from './pages/KKA';
 
 function App() {
+
   return (
     <Router>
       <div className="App">
@@ -24,7 +27,11 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/news" element={<News />} />
+          <Route path="/article/:id" element={<RenunganDetail />} />
           <Route path="/service" element={<Service />} />
+          <Route path="/kka" element={<KKA />} />
+
+          
           <Route path="/giving" element={<Giving />} />
           <Route path="/about" element={<About />} />
           <Route path="/form-jemaat" element={<FormJemaat />} />

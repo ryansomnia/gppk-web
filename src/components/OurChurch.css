@@ -1,0 +1,61 @@
+.ourchurch-section {
+  margin-top: 20vh;
+  display: flex;
+  flex-direction: row;
+  height: auto; /* Change height to auto for better responsiveness */
+  background-color: #fff;
+  flex-wrap: wrap; /* Allow flex items to wrap */
+}
+
+.right-ourchurch-section {
+  flex: 1; /* Adjust flex to allow proper scaling */
+  max-width: 50%; /* Maximum width for larger screens */
+}
+
+.right-ourchurch-section img {
+  width: 100%; /* Use 100% for responsiveness */
+  height: auto; /* Maintain aspect ratio */
+  border-radius: 25vh 0 0 25vh;
+  background-color: #10375C;
+}
+
+.left-ourchurch-section {
+  flex: 1; /* Adjust flex to allow proper scaling */
+  padding: 5vh; /* Reduced padding for smaller screens */
+  margin-top: 30px;
+}
+
+.left-ourchurch-section h6,
+.left-ourchurch-section h1,
+.left-ourchurch-section p {
+  color: #10375C;
+  margin: 0; /* Reset margin for consistent spacing */
+}
+
+.left-ourchurch-section h6 {
+  font-weight: 300;
+}
+
+.left-ourchurch-section h1 {
+  font-weight: bolder;
+}
+
+.left-ourchurch-section p {
+  margin-bottom: 20px; /* Add margin to paragraphs for spacing */
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+  .ourchurch-section {
+    flex-direction: column; /* Stack items vertically on small screens */
+  }
+
+  .right-ourchurch-section {
+    max-width: 100%; /* Full width on smaller screens */
+    height: auto; /* Allow height to adjust */
+  }
+
+  .left-ourchurch-section {
+    padding: 5vh 10vw; /* Adjust padding for smaller screens */
+  }
+}

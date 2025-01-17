@@ -1,76 +1,84 @@
 .feature-area {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    height: 50vh;
-    padding: 20px;
-    gap: 100px; /* Gap untuk jarak antar item */
+  display: grid; /* Use grid layout */
+  grid-template-columns: repeat(5, 1fr); /* 5 columns for desktop */
+  justify-items: center; /* Center items */
+  padding: 20px;
+  gap: 20px; /* Space between items */
+  margin: 15vh 0; /* Margin on the top and bottom */
+}
+
+.feature-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  transition: transform 0.3s ease; /* Hover effect */
+}
+
+.feature-item:hover {
+  transform: scale(1.1); /* Zoom effect on hover */
+}
+
+.button-feature {
+  background-color: #10375C;
+  height: 15vh;
+  width: 15vh;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  color: white;
+  transition: background-color 0.3s ease;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.button-feature:hover {
+  background-color: #FFCC00; /* Change color on hover */
+}
+
+.feature-item p {
+  margin-top: 10px;
+  font-size: 1.1rem;
+  color: #333;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .feature-area {
+    grid-template-columns: repeat(4, 1fr); /* 4 columns for tablets */
   }
-  
-  .feature-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    transition: transform 0.3s ease; /* Efek hover */
-  }
-  
-  .feature-item:hover {
-    transform: scale(1.1); /* Membesarkan item saat hover */
+}
+
+@media (max-width: 768px) {
+  .feature-area {
+    grid-template-columns: repeat(3, 1fr); /* 3 columns for mobile */
+    grid-template-rows: repeat(2, auto); /* Two rows for items */
   }
   
   .button-feature {
-    background-color: #ff6f61;
-    height: 15vh;
-    width: 15vh;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 2rem;
-    color: white;
-    transition: background-color 0.3s ease;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-  }
-  
-  .button-feature:hover {
-    background-color: #e95a4f;
+    height: 12vh; /* Adjust button size */
+    width: 12vh;
+    font-size: 1.5rem; /* Adjust icon size */
   }
   
   .feature-item p {
-    margin-top: 10px;
-    font-size: 1.1rem;
-    color: #333;
+    font-size: 1rem; /* Adjust text size */
+  }
+}
+
+@media (max-width: 480px) {
+  .feature-area {
+    grid-template-columns: repeat(2, 1fr); /* 2 columns for smaller screens */
+  }
+
+  .button-feature {
+    height: 10vh; /* Further adjust button size */
+    width: 10vh;
+    font-size: 1.2rem; /* Adjust icon size */
   }
   
-  /* Responsive Design */
-  @media (max-width: 768px) {
-    .feature-area {
-      flex-direction: column;
-      height: auto;
-    }
-  
-    .button-feature {
-      height: 12vh;
-      width: 12vh;
-      font-size: 1.5rem;
-    }
-  
-    .feature-item p {
-      font-size: 1rem;
-    }
+  .feature-item p {
+    font-size: 0.9rem; /* Further adjust text size */
   }
-  
-  @media (max-width: 480px) {
-    .button-feature {
-      height: 10vh;
-      width: 10vh;
-      font-size: 1.2rem;
-    }
-  
-    .feature-item p {
-      font-size: 0.9rem;
-    }
-  }
-  
+}

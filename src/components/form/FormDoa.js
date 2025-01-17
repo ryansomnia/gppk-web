@@ -7,7 +7,7 @@ import './FormDoa.css';
 
 const FormDoa = () => {
   const [formData, setFormData] = useState({
-    username: '',
+    username: 'Jemaat',
     fullName: '',
     contactInfo: '',
     pokokDoa: ''
@@ -33,7 +33,7 @@ const FormDoa = () => {
 
       // Mengirim data ke API menggunakan axios
       const response = await axios.post(
-        'http://31.220.6.60:3001/cbn/v1/service/doa',
+        'http://localhost:3001/cbn/v1/service/doa/formDoa',
         formBody,
         {
           headers: {
@@ -83,17 +83,18 @@ const FormDoa = () => {
     <div className="jemaat-form-container">
       <h2>Form Permohonan Doa</h2>
       <form className="jemaat-form" onSubmit={handleSubmit}>
-        <div className="form-row">
+        {/* <div className="form-row">
           <label htmlFor="username">Username:</label>
           <input
+          disabled
             type="text"
             id="username"
             name="username"
             value={formData.username}
             onChange={handleChange}
-            required
+            // required
           />
-        </div>
+        </div> */}
 
         <div className="form-row">
           <label htmlFor="fullName">Nama Lengkap:</label>

@@ -30,10 +30,15 @@ const toggleMenu = () => {
         {/* Navbar Links */}
         <ul className={`nav-links ${isOpen ? 'open' : ''}`}>
           <li><Link to="/" onClick={toggleMenu}>Home</Link></li>
-          <li><Link to="/news" onClick={toggleMenu}>News</Link></li>
+          <li><Link to="/about" onClick={toggleMenu}>About Us</Link></li>
+          {/* isinya : Visi Misi Value, History, Our Believe, Struktur, Cabang, Location*/}
+          <li><Link to="/kka" onClick={toggleMenu}>KKA</Link></li>
+          {/* isinya ada komsel, sekolah minggu, Youth */}
           <li><Link to="/service" onClick={toggleMenu}>Service</Link></li>
+
           <li><Link to="/giving" onClick={toggleMenu}>Giving</Link></li>
-          <li><Link to="/about" onClick={toggleMenu}>About</Link></li>
+          <li><Link to="/giving" onClick={toggleMenu}>Login</Link></li>
+        
         </ul>
       </nav>
       {/* This pushes the content below the navbar */}

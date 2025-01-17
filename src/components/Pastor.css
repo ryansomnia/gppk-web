@@ -1,0 +1,61 @@
+.pastor-section {
+    display: flex;
+    flex-direction: row;
+    height: auto; /* Change height to auto for better responsiveness */
+    background-color: #10375C;
+    margin-top: 20vh;
+    flex-wrap: wrap; /* Allow flex items to wrap */
+  }
+  
+  .left-section {
+    flex: 1; /* Allow proper scaling */
+    max-width: 50%; /* Maximum width for larger screens */
+  }
+  
+  .left-section img {
+    width: 100%; /* Use 100% for responsiveness */
+    height: auto; /* Maintain aspect ratio */
+    border-radius: 0 25vh 25vh 0;
+  }
+  
+  .right-section {
+    flex: 1; /* Allow proper scaling */
+    padding: 5vh; /* Reduced padding for smaller screens */
+    margin-top: 30px;
+  }
+  
+  .right-section h6,
+  .right-section h1,
+  .right-section p {
+    color: #F4F6FF;
+    margin: 0; /* Reset margin for consistent spacing */
+  }
+  
+  .right-section h6 {
+    font-weight: 300;
+  }
+  
+  .right-section h1 {
+    font-weight: bolder;
+  }
+  
+  .right-section p {
+    margin-bottom: 20px; /* Add margin to paragraphs for spacing */
+  }
+  
+  /* Media Queries */
+  @media (max-width: 768px) {
+    .pastor-section {
+      flex-direction: column; /* Stack items vertically on small screens */
+    }
+  
+    .left-section {
+      max-width: 100%; /* Full width on smaller screens */
+      height: auto; /* Allow height to adjust */
+    }
+  
+    .right-section {
+      padding: 5vh 10vw; /* Adjust padding for smaller screens */
+    }
+  }
+  

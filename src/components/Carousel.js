@@ -7,7 +7,7 @@ import "./Carousel.css";
 // Fetch carousel data from API
 const fetchCarouselData = async () => {
   const response = await axios.post(
-    "http://31.220.6.60:3001/cbn/v1/artikel/getDataByKategori",
+    "http://localhost:3001/cbn/v1/artikel/getDataByKategori",
     { kategori: 'carousel' },
     {
       headers: {
@@ -24,7 +24,7 @@ const fetchCarouselData = async () => {
   return response.data.data;
 };
 
-function CarouselInterval() {
+function BannerInterval() {
   // React Query for data fetching
   const { data: carouselData = [], isLoading, error } = useQuery({
     queryKey: ['carouselData'],
@@ -67,4 +67,4 @@ function CarouselInterval() {
   );
 }
 
-export default CarouselInterval;
+export default BannerInterval;

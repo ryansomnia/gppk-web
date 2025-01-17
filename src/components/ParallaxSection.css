@@ -1,11 +1,11 @@
-/* Parallax Section Styling */
+/* Background Section Styling (Tanpa Parallax) */
+/* Background Section Styling */
 .parallax {
-  background-image: url('../../public/images/bg.jpg'); 
   position: relative;
   height: 70vh;
-  background-attachment: fixed; /* Enables parallax scrolling */
   background-size: cover;
   background-position: center;
+  background-repeat: no-repeat;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -13,8 +13,8 @@
   color: white;
   text-align: center;
   z-index: 1;
-}
 
+}
 
 /* Overlay effect to darken the background */
 .parallax::before {
@@ -29,12 +29,12 @@
 }
 
 /* Overlay Content */
+/* Overlay Content */
 .overlay-content {
   position: relative;
   z-index: 2;
   padding: 0 20px;
   text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7); /* Add text shadow for better contrast */
-  animation: fadeIn 2s ease-in-out; /* Smooth fade-in effect for elegance */
 }
 
 /* Title Styling */
@@ -45,7 +45,6 @@
   margin-bottom: 10px;
   line-height: 1.2;
 }
-
 
 /* Subtitle Styling */
 .overlay-content p {
@@ -71,6 +70,8 @@
 @media (max-width: 768px) {
   .parallax {
     height: 50vh; /* Reduce height on smaller screens */
+    background-size: cover; /* Ensures the background scales properly */
+    object-fit: cover; /* Ensures the background scales properly */
   }
 
   .overlay-content h1 {
@@ -84,7 +85,9 @@
 
 @media (max-width: 480px) {
   .parallax {
-    height: 40vh; /* Further reduce height on mobile devices */
+    height: 40vh; /* Reduce height on smaller screens */
+    background-size: cover; /* Ensures background fills the container */
+    object-fit: contain;
   }
 
   .overlay-content h1 {
