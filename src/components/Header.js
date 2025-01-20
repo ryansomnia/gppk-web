@@ -33,7 +33,7 @@ const Header = () => {
   // Mutation untuk login
   const loginMutation = useMutation({
     mutationFn: async ({ username, password }) => {
-      const response = await fetch("/cbn/v1/user/login", {
+      const response = await fetch("http://31.220.6.60:3013/cbn/v1/user/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

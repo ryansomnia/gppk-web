@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom';
 
 const fetchRenunganData = async () => {
   const response = await axios.post(
-    "/cbn/v1/artikel/getDataByKategori",
+    "http://31.220.6.60:3013/cbn/v1/artikel/getDataByKategori",
     { kategori: 'renungan' },
     {
       headers: {

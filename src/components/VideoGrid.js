@@ -6,7 +6,7 @@ import axios from "axios";
 
 const fetchYoutubeData = async () => {
   const response = await axios.get(
-    "/cbn/v1/youtube/getAllYoutube",
+    "http://31.220.6.60:3013/cbn/v1/youtube/getAllYoutube",
     // { kategori: 'carousel' },
     {
       headers: {
