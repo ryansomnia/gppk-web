@@ -7,7 +7,7 @@ import "./Carousel.css";
 // Fetch carousel data from API
 const fetchCarouselData = async () => {
   const response = await axios.post(
-    "http://localhost:3001/cbn/v1/artikel/getDataByKategori",
+    "http://31.220.6.60:3013/cbn/v1/artikel/getDataByKategori",
     { kategori: 'carousel' },
     {
       headers: {
@@ -20,7 +20,9 @@ const fetchCarouselData = async () => {
   if (response.data.code !== 200) {
     throw new Error('Failed to load carousel data');
   }
-
+console.log('============response========================');
+console.log(response);
+console.log('====================================');
   return response.data.data;
 };
 
@@ -38,11 +40,22 @@ function BannerInterval() {
 
   // Handle error state
   if (error) {
-    return <div className="error">Error: {error.message}</div>;
+    // return <div className="error">Error: {error.message}</div>;
+    console.log(`error: ${error.message}`);
+    return null; // Don't render anything
+  }
+
+  // Handle empty data
+  if (carouselData.length === 0) {
+    console.log("Carousel data is empty");
+    return null; // Don't render anything
   }
 
   return (
     <div className="carousel-container">
+     <h1 className="sm:text-6xl text-4xl font-bold mb-16 sm:mb-20  text-center text-gray-800">
+    EVENT CBN
+  </h1>
       <Carousel>
         {carouselData.map((item, index) => (
           <Carousel.Item

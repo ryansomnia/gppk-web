@@ -33,7 +33,7 @@ const Header = () => {
   // Mutation untuk login
   const loginMutation = useMutation({
     mutationFn: async ({ username, password }) => {
-      const response = await fetch("http://localhost:3001/cbn/v1/user/login", {
+      const response = await fetch("http://31.220.6.60:3013/cbn/v1/user/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -106,18 +106,42 @@ const Header = () => {
     registerMutation.mutate({ username, email, password });
   };
 
-  const userData = queryClient.getQueryData("user");
+  // const userData = queryClient.getQueryData("user");
 
   return (
-    <header className="header">
-      <div className="header-left">
-        <img src="logogppk.png" alt="Logo" className="logo" />
-        <div className="header-text">
-          <h1>GPPK CBN</h1>
-          <p>Christ Bless Nation</p>
-        </div>
+    <header className="flex justify-between items-center p-6 bg-gradient-to-r  rounded-lg shadow-lg">
+    {/* Pojok Kiri */}
+    <div className="flex items-center text-left text-white">
+        <img
+          src="logogppk.png" // Ganti dengan path logo yang sesuai
+          alt="Logo CBN"
+          className="w-12 h-12 mr-4" // Ukuran logo, sesuaikan dengan kebutuhan
+        />
+    <div className="text-left text-white">
+      <h1 className="inline text-3xl font-extrabold tracking-wide">CBN Church</h1>
+     <br/> <p className="inline text-l text-gray-600 font-medium italic ">Christ Bless Nations</p>
+    </div>
+   
+</div>
+  {/* Pojok Kanan */}
+  <div className="text-right text-white">
+        <p className="text-black text-sm flex items-center">
+          Alamat: Gedung TK-SD Cerdas Bangsa
+          <br/>Jl. Raya jakarta bogor Km. 50 Megapolitan, Cimandala, Sukaraja, Kab. Bogor
+          <span className="mx-2">|</span>
+          
+          <span className="text-yellow-500 font-semibold">Ada Pertanyaan</span>
+          <a
+            href="https://wa.me/6281384757288" // Link WhatsApp
+            target="_blank" // Membuka di tab baru
+            rel="noopener noreferrer" // Keamanan saat membuka link
+            className="ml-2 bg-blue-500 text-white text-sm py-1 px-4 rounded-lg hover:bg-blue-600 flex items-center space-x-2 transition duration-300"
+          >
+            <i className="fas fa-comment-dots text-white text-lg"></i> {/* Ikon chat */}
+            <span>Chat Kami</span>
+          </a>
+        </p>
       </div>
-
      
 
       <Modal

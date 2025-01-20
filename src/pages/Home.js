@@ -6,7 +6,7 @@ import ParallaxSection from '../components/ParallaxSection';
 import Feature from '../components/Feature';
 import BannerInterval from '../components/Carousel';
 import VisiMisi from '../components/VisiMisi';
-import Pastor from '../components/Pastor';
+// import Pastor from '../components/Pastor';
 import OurChurch from '../components/OurChurch';
 import Pray from '../components/Pray';
 import BannerBible from '../components/BannerBible';
@@ -25,18 +25,22 @@ function Home() {
   const { data: schedule, isLoading, isError } = useQuery({
     queryKey: ['scheduleBible'],
     queryFn: async () => {
-      const response = await axios.get('http://localhost:3001/cbn/v1/reportBible/getTodaySchedule');
+      const response = await axios.get('http://31.220.6.60:3013/cbn/v1/reportBible/getTodaySchedule');
       return response.data.data[0]; // Mengambil data schedule pertama
     },
   });
 
+
+  
   return (
     <div>
       <ParallaxSection />
-      <VideoGrid/> 
-      <BannerInterval />
       <WorshipLayout/>
       <RenunganInterval />
+      <BannerInterval />
+
+
+      <VideoGrid/> 
 
       {user && user.status !== '1' ? (
         isLoading ? (
@@ -47,11 +51,11 @@ function Home() {
           <BannerBible scheduleId={schedule?.schedule_id} />
         )
       ) : null}
-      <VisiMisi />
+      {/* <VisiMisi /> */}
       <Feature />
       
       {/* <Pastor /> */}
-      <OurChurch />
+      {/* <OurChurch /> */}
       <Pray />
     </div>
   );

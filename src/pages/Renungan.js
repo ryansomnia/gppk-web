@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom';
 
 const fetchRenunganData = async () => {
   const response = await axios.post(
-    "http://localhost:3001/cbn/v1/artikel/getDataByKategori",
+    "http://31.220.6.60:3013/cbn/v1/artikel/getDataByKategori",
     { kategori: 'renungan' },
     {
       headers: {
@@ -32,20 +32,29 @@ function RenunganInterval() {
   });
 
   // Handle loading state
-  if (isLoading) {
-    return <div className="loading">Loading...</div>;
-  }
+  // if (isLoading) {
+  //   return <div className="loading">Loading...</div>;
+  // }
 
   // Handle error state
   if (error) {
-    return <div className="error">Error: {error.message}</div>;
+    // return <div className="error">Error: {error.message}</div>;
+    console.log(`error: ${error.message}`);
+    return null; // Don't render anything
   }
+
+   // Handle empty data
+   if (renunganData.length === 0) {
+    console.log("Carousel data is empty");
+    return null; // Don't render anything
+  }
+
 
 
 return (
 <div className="p-4 max-w-7xl mx-auto">
   <h1 className="sm:text-6xl text-4xl font-bold mb-16 sm:mb-20  text-center text-gray-800">
-    Bahan Renungan 
+    Khotbah Mingguan
   </h1>
   <div className="flex overflow-x-auto gap-4 p-4 scrollbar-thin scrollbar-thumb-blue-500 scrollbar-track-gray-200">
     {renunganData.map((item) => (
