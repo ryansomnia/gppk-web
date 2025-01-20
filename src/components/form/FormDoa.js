@@ -33,7 +33,7 @@ const FormDoa = () => {
 
       // Mengirim data ke API menggunakan axios
       const response = await axios.post(
-        'http://31.220.6.60:3013/cbn/v1/service/doa/formDoa',
+        '/cbn/v1/service/doa/formDoa',
         formBody,
         {
           headers: {

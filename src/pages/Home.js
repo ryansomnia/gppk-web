@@ -25,7 +25,7 @@ function Home() {
   const { data: schedule, isLoading, isError } = useQuery({
     queryKey: ['scheduleBible'],
     queryFn: async () => {
-      const response = await axios.get('http://31.220.6.60:3013/cbn/v1/reportBible/getTodaySchedule');
+      const response = await axios.get('/cbn/v1/reportBible/getTodaySchedule');
       return response.data.data[0]; // Mengambil data schedule pertama
     },
   });
