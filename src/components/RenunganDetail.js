@@ -9,7 +9,7 @@ const RenunganDetail = () => {
   // Fetch data menggunakan React Query
   const fetchRenunganData = async () => {
     const response = await axios.post(
-      "http://31.220.6.60:3013/cbn/v1/artikel/getDataByKategori",
+      "https://api.gppkcbn.org/cbn/v1/artikel/getDataByKategori",
       { kategori: 'renungan' },
       {
         headers: {

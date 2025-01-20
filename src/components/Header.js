@@ -33,7 +33,7 @@ const Header = () => {
   // Mutation untuk login
   const loginMutation = useMutation({
     mutationFn: async ({ username, password }) => {
-      const response = await fetch("http://31.220.6.60:3013/cbn/v1/user/login", {
+      const response = await fetch("https://api.gppkcbn.org/cbn/v1/user/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -73,7 +73,7 @@ const Header = () => {
   const registerMutation = useMutation({
     mutationFn: async ({ username, email, password, fullName, alamat, noHP }) => {
       let status = 6
-      const response = await fetch("http://localhost:3001/cbn/v1/user/register", {
+      const response = await fetch("https://api.gppkcbn.org/cbn/v1/user/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

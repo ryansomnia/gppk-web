@@ -29,7 +29,7 @@ const BannerBible = () => {
   useEffect(() => {
     const getTodaySchedule = async () => {
       try {
-        const response = await axios.get('http://31.220.6.60:3013/cbn/v1/reportBible/getTodaySchedule');
+        const response = await axios.get('https://api.gppkcbn.org//cbn/v1/reportBible/getTodaySchedule');
         console.log('====================================');
         console.log("masuk ga");
         console.log('====================================');
@@ -59,7 +59,7 @@ const BannerBible = () => {
       console.log('====================================');
       console.log(userData,'userData');
       console.log('====================================');
-      await axios.post('http://31.220.6.60:3013/cbn/v1/reportBible/readingProgress', {
+      await axios.post('https://api.gppkcbn.org/cbn/v1/reportBible/readingProgress', {
         username: userData?.username,
         scheduleId,
         chapter1Checked: checked.chapter_1 ? 1 : 0,
