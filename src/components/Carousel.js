@@ -53,7 +53,7 @@ function BannerInterval() {
 
   return (
     <div className="carousel-container">
-     <h1 className="sm:text-6xl text-4xl font-bold mb-16 sm:mb-20  text-center text-gray-800">
+     <h1 className="sm:text-6xl text-5xl font-bold mb-10 sm:mb-30  text-center text-gray-800">
     EVENT CBN
   </h1>
       <Carousel>

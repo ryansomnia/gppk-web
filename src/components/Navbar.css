@@ -33,6 +33,7 @@
   padding: 10px;
   transition: all 0.3s ease;
   border-radius: 4px;
+  margin-right: 10px;
   
 
 }
@@ -79,19 +80,21 @@
   display: flex;
   position: absolute;
   top: 60px;
-  left: 0; /* Posisi dari kiri */
+  left: 0; /* Tetap dari kiri */
   background-color: white;
-  width: 50%; /* Ubah lebar menu menjadi 50% layar */
-  height: 30vh; /* Kurangi tinggi menu menjadi 60% layar */
+  width: 50%; /* Lebar menu tetap 50% layar */
+  height: auto; /* Kurangi tinggi menu menjadi 60% layar */
   flex-direction: column;
-  justify-content: center; /* Center vertically */
-  align-items: center; /* Center horizontally */
-  transition: transform 0.3s ease-in-out; /* Animasi sliding yang mulus */
-  transform: translateX(-100%); /* Awalnya tersembunyi di luar layar */
+  justify-content: start; /* Posisi dari atas */
+  align-items: start; /* Posisi horizontal ke kiri */
+  transition: transform 0.3s ease-in-out;
+  transform: translateX(-100%);
+  padding: 15px; /* Tambahkan padding untuk jarak */
   border-radius: 0px 20px 20px 0px; /* Sesuaikan sudut */
 }
 .nav-links.open {
   transform: translateX(0); /* Geser ke tampilan normal saat dibuka */
+
 }
 .nav-links li {
   margin: 15px 0; /* Atur margin antar item agar tetap nyaman */
@@ -108,9 +111,26 @@
   text-align: center; /* Pastikan teks tetap center */
 }
 .nav-links.open li {
-  margin: 20px 0;
+  margin: 15px 0;
+  width: 100%; /* Pastikan item mengambil lebar penuh */
 }
-
+.nav-links.open a {
+  text-decoration: none;
+  color: #333;
+  font-size: 18px;
+  font-weight: 500;
+  padding: 10px 15px; /* Padding untuk spasi horizontal */
+  text-align: left; /* Rata kiri */
+  width: 100%; /* Pastikan link mengambil lebar penuh */
+ 
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+.nav-links.open a:hover {
+  background-color: #ffcc00; /* Hover kuning */
+  color: white; /* Teks putih */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15); /* Bayangan lembut */
+}
 
 /* Responsive Design */
 @media (max-width: 768px) {
@@ -145,8 +165,16 @@
 
 .nav-links.open li {
     margin: 10px 0; /* Kurangi margin di mobile */
+
+}
+.nav-links a:hover {
+background-color: #ffcc00;
 }
 .nav-links.open {
   transform: translateX(0); /* Geser ke dalam layar saat dibuka */
+  /* background-color : #ffcc00; */
+  transition: all 0.3s ease;
+width: auto;
+padding: 3vh;
 }
 }

@@ -36,44 +36,7 @@ const VideoGrid = () => {
   if (error) {
     return <div className="error">Error: {error.message}</div>;
   }
-  // const videos = [
-  //   {
-  //     id: 1,
-  //     title: "Ibadah Raya GPPK CBN 5 Januari 2025",
-  //     speaker: "Ps. Hendrawan",
-  //     url: "https://www.youtube.com/embed/-Lrhogz60Rc",
-  //   },
-  //   {
-  //     id: 2,
-  //     title: "Ibadah Raya GPPK CBN 25 Agustus 2024",
-  //     speaker: "Ps. Hendrawan",
-  //     url: "https://www.youtube.com/embed/jOulsmMg28E",
-  //   },
-  //   {
-  //     id: 3,
-  //     title: "Ibadah Raya GPPK CBN 25 Agustus 2024",
-  //     speaker: "Ps. Hendrawan",
-  //     url: "https://www.youtube.com/embed/jOulsmMg28E",
-  //   },
-  //   {
-  //     id: 4,
-  //     title: "Ibadah Raya GPPK CBN 25 Agustus 2024",
-  //     speaker: "Ps. Hendrawan",
-  //     url: "https://www.youtube.com/embed/jOulsmMg28E",
-  //   },
-  //   {
-  //     id: 5,
-  //     title: "Ibadah Raya GPPK CBN 25 Agustus 2024",
-  //     speaker: "Ps. Hendrawan",
-  //     url: "https://www.youtube.com/embed/jOulsmMg28E",
-  //   },
-  //   {
-  //     id: 6,
-  //     title: "Ibadah Raya GPPK CBN 25 Agustus 2024",
-  //     speaker: "Ps. Hendrawan",
-  //     url: "https://www.youtube.com/embed/jOulsmMg28E",
-  //   },
-  // ];
+  
 
   // Membagi video menjadi grup dengan 3 item per slide
   const groupedVideos = [];
@@ -91,24 +54,23 @@ const VideoGrid = () => {
               <div className="d-flex justify-content-around">
                 {group.map((video) => (
                   <div
-                    key={video.id}
-                    className="bg-white rounded-lg shadow-md overflow-hidden"
-                    style={{ width: "30%" }}
-                  >
-                    <iframe
-                      src={video.url}
-                      className="w-100"
-                      title={video.title}
-                      style={{ height: "200px" }}
-                      frameBorder="0"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                      allowFullScreen
-                    ></iframe>
-                    <div className="p-4 text-center">
-                      <h3 className="text-lg font-bold text-gray-800">{video.title}</h3>
-                      <p className="text-sm text-gray-600">{video.speaker}</p>
-                    </div>
+                  key={video.id}
+                  className="bg-white rounded-lg shadow-md overflow-hidden flex-shrink-0 mr-3 lg:mr-10"
+                  style={{ flexBasis: "40%", maxWidth: "40%" }} // Menampilkan 2,5 konten di handphone
+                >
+                  <iframe
+                    src={`${video.url}?modestbranding=1&showinfo=0`}
+                    className="w-full h-32 md:h-48 lg:h-56"
+                    title={video.title}
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                  ></iframe>
+                  <div className="p-[5px] md:p-4 text-center">
+                    <h3 className="text-[9px] md:text-lg font-bold text-gray-800">{video.title}</h3>
+                    <p className="text-[7px] md:text-sm text-gray-600">Speaker: {video.speaker}</p>
                   </div>
+                </div>
                 ))}
               </div>
             </Carousel.Item>

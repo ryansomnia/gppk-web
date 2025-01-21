@@ -1,4 +1,4 @@
-import React, {useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import './Navbar.css';
 
@@ -6,20 +6,18 @@ function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
 
+  // Close the menu when the route changes
+  useEffect(() => {
+    setIsOpen(false); // Close the menu on route change
+  }, [location]);
 
- // Close the menu when the route changes
- useEffect(() => {
-  setIsOpen(false); // Close the menu on route change
-}, [location]);
+  const toggleMenu = () => {
+    setIsOpen(!isOpen);
+  };
 
-const toggleMenu = () => {
-  setIsOpen(!isOpen);
-};
   return (
     <>
       <nav className="navbar">
-        {/* <div className="logo">Our Church</div> */}
-
         {/* Hamburger Button */}
         <div className={`burger ${isOpen ? 'toggle' : ''}`} onClick={toggleMenu}>
           <div className="line"></div>
@@ -31,16 +29,13 @@ const toggleMenu = () => {
         <ul className={`nav-links ${isOpen ? 'open' : ''}`}>
           <li><Link to="/" onClick={toggleMenu}>Home</Link></li>
           <li><Link to="/about" onClick={toggleMenu}>About Us</Link></li>
-          {/* isinya : Visi Misi Value, History, Our Believe, Struktur, Cabang, Location*/}
           <li><Link to="/kka" onClick={toggleMenu}>KKA (Keluarga Kerajaan Allah)</Link></li>
-          {/* isinya ada komsel, sekolah minggu, Youth */}
           <li><Link to="/service" onClick={toggleMenu}>Pastoral Care</Link></li>
-
           <li><Link to="/giving" onClick={toggleMenu}>Persembahan</Link></li>
-          <li><Link to="/giving" onClick={toggleMenu}>Login</Link></li>
-        
+          <li><Link to="/login" onClick={toggleMenu}>Login</Link></li>
         </ul>
       </nav>
+
       {/* This pushes the content below the navbar */}
       <div className={`content ${isOpen ? 'pushed-down' : ''}`}>
         {/* Other content of the page goes here */}

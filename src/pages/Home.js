@@ -35,12 +35,13 @@ function Home() {
   return (
     <div>
       <ParallaxSection />
-      <WorshipLayout/>
       <RenunganInterval />
       <BannerInterval />
-
-
       <VideoGrid/> 
+      <Pray />
+      <WorshipLayout/>
+      <Feature />
+
 
       {user && user.status !== '1' ? (
         isLoading ? (
@@ -52,11 +53,11 @@ function Home() {
         )
       ) : null}
       {/* <VisiMisi /> */}
-      <Feature />
+    
       
       {/* <Pastor /> */}
       {/* <OurChurch /> */}
-      <Pray />
+    
     </div>
   );
 }

@@ -61,6 +61,13 @@
 
 /* Responsive styling for mobile devices */
 @media (max-width: 768px) {
+  .carousel-container {
+    /* background-color: #f5c518; */
+    position: relative;
+    width: 90%;
+    /* margin: 10vh auto; */
+    overflow: hidden; 
+  }
   .carousel-slide img {
     max-height: 60vh;
     border-radius: 10px;
