@@ -1,5 +1,9 @@
 import React from 'react';
-
+// import bgImage from '../../public/images/';
+// ...
+// style={{
+//   backgroundImage: `url(${bgImage})`
+// }}
 const WorshipLayout = () => {
   return (
     <div className="flex flex-col md:flex-row my-14 ">
@@ -7,7 +11,7 @@ const WorshipLayout = () => {
     <div
       className="text-white flex items-center justify-center bg-center h-96 md:h-[70vh] md:w-[60%] shadow-xl"
       style={{
-        backgroundImage: " linear-gradient(rgba(0, 251, 255, 0.6), rgba(0, 251, 255, 0.6)), url('/images/usher1.jpg')", // Transparansi lebih rendah
+        backgroundImage: " linear-gradient(rgba(0, 251, 255, 0.6), rgba(0, 251, 255, 0.6)), url('../../public/images/usher1.jpg')", // Transparansi lebih rendah
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         transition: 'background-image 1s ease-in-out',
@@ -29,7 +33,7 @@ const WorshipLayout = () => {
       <div className="flex flex-wrap md:w-[40%]">
         {/* First Block */}
         <div className="flex items-end justify-center w-1/2 h-48 md:h-1/2" style={{
-  backgroundImage: " url('/images/bg1.jpg')",
+  backgroundImage: " url('../../public/images/bg1.jpg')",
   backgroundSize: 'cover',
   backgroundPosition: 'center',
   transition: 'background-image 1s ease-in-out',
@@ -43,7 +47,7 @@ const WorshipLayout = () => {
         {/* Second Block */}
         <div className=" flex items-end justify-center w-1/2 h-48 md:h-1/2"
          style={{
-          backgroundImage: "url('/images/bg2.jpg')", // Transparansi lebih rendah
+          backgroundImage: "url('../../public/images/bg2.jpg')", // Transparansi lebih rendah
   
           backgroundSize: 'cover',
           backgroundPosition: 'center',
@@ -58,7 +62,7 @@ const WorshipLayout = () => {
 
         {/* Third Block */}
         <div className=" text-white flex items-end justify-center w-1/2 h-48 md:h-1/2" style={{
-          backgroundImage: "url('/images/sm1.jpg')", // Transparansi lebih rendah
+          backgroundImage: "url('../../public/images/sm1.jpg')", // Transparansi lebih rendah
   
           backgroundSize: 'cover',
           backgroundPosition: 'center',
