@@ -24,7 +24,7 @@ const KegiatanKKA = () => {
     },
     {
       title: 'Kesaksian',
-      image: '/images/IMG_5078.jpg',
+      image: '/images/IMG_5078.JPG',
       description: 'Mendengar dan membagikan pengalaman iman yang menguatkan.',
     },
     {
