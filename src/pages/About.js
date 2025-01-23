@@ -10,7 +10,7 @@ function About() {
       <section
   className="relative py-10 bg-slate-400 flex items-center justify-center bg-fixed bg-center bg-cover text-white"
   style={{
-    backgroundImage: `url('/images/pw.jpg')`,
+    backgroundImage: `url('/images/pw.JPG')`,
     transition: 'background-image 1s ease-in-out',
   }}
   id="parallax-section"
