@@ -107,7 +107,7 @@ const Header = () => {
         <div className="text-left text-white">
           <h1 className="inline text-3xl font-extrabold tracking-wide">CBN Church</h1>
           <br/>
-          <p className="inline text-l text-gray-600 font-medium italic">Christ Bless Nations</p>
+          <p className="inline text-l text-gray-600 font-medium italic">Christ Bless Nation</p>
         </div>
       </div>
       {/* Pojok Kanan */}

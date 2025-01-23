@@ -42,7 +42,7 @@ const WorshipLayout = () => {
   backgroundPosition: 'center',
   transition: 'background-image 1s ease-in-out',
 }}>
-   <div className=" text-center bg-yellow-600 py-1 px-2 m-1 rounded-lg">
+   <div className=" text-center bg-[rgba(16,55,92,0.6)] py-1 px-2 m-1 rounded-lg  w-64">
   <h3 className="text-[10px] sm:text-xl font-semibold text-white">Ibadah Raya Umum</h3>
   <p className="text-[8px] sm:text-xs font-normal text-white leading-tight">Ibadah Umum setiap Minggu, Jam 09:00 WIB</p>
 </div>
@@ -58,7 +58,7 @@ const WorshipLayout = () => {
           transition: 'background-image 1s ease-in-out',
         }}>
           
-          <div className=" text-center bg-yellow-600 py-1 px-2 m-1 rounded-lg">
+          <div className=" text-center bg-[rgba(16,55,92,0.6)] py-1 px-2 m-1 rounded-lg  w-64">
   <h3 className="text-[10px] sm:text-xl font-semibold text-white">Ibadah Youth</h3>
   <p className="text-[8px] sm:text-xs font-normal text-white leading-tight">Ibadah Anak Muda setiap Minggu, Jam 16:00 WIB</p>
 </div>
@@ -72,20 +72,26 @@ const WorshipLayout = () => {
           backgroundPosition: 'center',
           transition: 'background-image 1s ease-in-out',
         }}>
-          <div className=" text-center bg-yellow-600 py-1 px-2 m-1 rounded-lg">
+          <div className=" text-center bg-[rgba(16,55,92,0.6)] py-1 px-2 m-1 rounded-lg  w-64">
   <h3 className="text-[10px] sm:text-xl font-semibold text-white">Ibadah Sekolah Minggu</h3>
   <p className="text-[8px] sm:text-xs font-normal text-white leading-tight">Ibadah Anak di tiap kelas jam 09:00 WIB</p>
 </div>
         </div>
 
         {/* Fourth Block */}
-        <div className="bg-gray-900 text-white flex items-center justify-center w-1/2 h-48 md:h-1/2">
-          <div className="text-center">
-            <h3 className="text-lg font-semibold">Ibadah KKA</h3>
-            <p className="text-sm">dari senin sampai Minggu</p>
-         
-         
-          </div>
+        
+        <div className=" text-white flex items-end justify-center w-1/2 h-48 md:h-1/2" style={{
+       
+          backgroundImage: "url(/images/doapagi1.jpeg)", // Transparansi lebih rendah
+  
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          transition: 'background-image 1s ease-in-out',
+        }}>
+         <div className=" text-center bg-[rgba(16,55,92,0.6)] py-1 px-2 m-1 rounded-lg w-64">
+  <h3 className="text-[10px] sm:text-xl font-semibold text-white">Doa Pagi</h3>
+  <p className="text-[8px] sm:text-xs font-normal text-white leading-tight">Setiap Sabtu, jam 06:00 WIB</p>
+</div>
         </div>
       </div>
     </div>

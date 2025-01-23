@@ -24,7 +24,7 @@ function ParallaxSection() {
     >
       <div className="overlay-content">
         <h1>Welcome Home</h1>
-        <p>Rasakan dan Alami Kasih Karunia dan Perjumpaan pribadi dengan Kristus hari ini.</p>
+        <p>Alami Kasih Karunia dan Perjumpaan Pribadi Dengan Kristus Hari Ini.</p>
       </div>
     </div>
   );

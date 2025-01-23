@@ -5,21 +5,22 @@ import axios from 'axios';
 import ParallaxSection from '../components/ParallaxSection';
 import Feature from '../components/Feature';
 import BannerInterval from '../components/Carousel';
-import VisiMisi from '../components/VisiMisi';
+// import VisiMisi from '../components/VisiMisi';
 // import Pastor from '../components/Pastor';
-import OurChurch from '../components/OurChurch';
+// import OurChurch from '../components/OurChurch';
 import Pray from '../components/Pray';
 import BannerBible from '../components/BannerBible';
 import RenunganInterval from './Renungan';
 import WorshipLayout from '../components/WorshipLayouts';
 import VideoGrid from '../components/VideoGrid';
+import BannerBibleStatic from '../components/BannerBibleStatic';
 
 function Home() {
   // Ambil data user dari localStorage
-  const user = React.useMemo(() => {
-    const userData = localStorage.getItem('user');
-    return userData ? JSON.parse(userData) : null;
-  }, []);
+  // const user = React.useMemo(() => {
+  //   const userData = localStorage.getItem('user');
+  //   return userData ? JSON.parse(userData) : null;
+  // }, []);
 
   // Ambil data jadwal dari API menggunakan React Query
   const { data: schedule, isLoading, isError } = useQuery({
@@ -43,15 +44,16 @@ function Home() {
       <Feature />
 
 
-      {user && user.status !== '1' ? (
-        isLoading ? (
-          <p>Loading schedule data...</p>
-        ) : isError ? (
-          <p>Error fetching schedule data</p>
-        ) : (
-          <BannerBible scheduleId={schedule?.schedule_id} />
-        )
-      ) : null}
+      {/* {user && user.status !== '1' ? ( */}
+        {/* isLoading ? ( */}
+          {/* <p>Loading schedule data...</p> */}
+        {/* ) : isError ? ( */}
+          {/* <p>Error fetching schedule data</p> */}
+        {/* ) : ( */}
+          {/* <BannerBible scheduleId={schedule?.schedule_id} /> */}
+          <BannerBibleStatic/>
+        {/* ) */}
+      {/* ) : null} */}
       {/* <VisiMisi /> */}
     
       

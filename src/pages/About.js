@@ -1,5 +1,6 @@
 import React from "react";
 import VisiMisi from "../components/VisiMisi";
+import StrukturOrganisasi from "../components/StrukturOrganisasi";
 
 function About() {
   return (
@@ -8,7 +9,7 @@ function About() {
 
       {/* Hero Section */}
       <section
-  className="relative py-10 bg-slate-400 flex items-center justify-center bg-fixed bg-center bg-cover text-white"
+  className="relative py-36 bg-slate-400 flex items-center justify-center bg-fixed bg-center bg-cover text-white"
   style={{
     backgroundImage: `url('/images/pw.JPG')`,
     transition: 'background-image 1s ease-in-out',
@@ -17,15 +18,14 @@ function About() {
 >
   <div className="absolute inset-0 bg-black bg-opacity-50"></div>
   <div className="relative z-0 text-center mx-6 md:mx-16 lg:mx-28">
-    <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 lg:mb-10 text-white">
-      Christ Bless Nations
+    <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 lg:mb-5 text-white">
+      Christ Bless Nation
     </h1>
-    <p className="text-sm sm:text-base lg:text-xl mb-6 font-normal leading-relaxed sm:leading-loose">
-      CBN adalah gereja beraliran Kharismatik yang berakar kuat pada kegerakan Karunia Roh Kudus dan Pujian Penyembahan yang mewahyukan hadirat Tuhan. <br/>Berdiri pada tahun 1999, GPPK dimulai dari sebuah persekutuan kecil yang beranggotakan hanya 10-12 jemaat.
-      <br />
-      <br />
-      Hingga hari ini, GPPK CBN tetap teguh pada visi dan misinya: membawa setiap jiwa kepada pengenalan yang mendalam akan Kristus dan memperluas pelayanan hingga ke seluruh pelosok Indonesia. Dengan semangat yang tak pernah padam, GPPK terus menjadi saluran kasih dan kuasa Tuhan, menjangkau mereka yang haus akan kebenaran, dan membangun generasi yang hidup dalam penyembahan sejati dan ketaatan penuh kepada Tuhan.
-    </p>
+   
+    <p className="text-sm sm:text-base lg:text-xl font-normal leading-relaxed sm:leading-loose ">
+    CBN Church adalah gereja sel yang Apostolik yang bergerak dalam pimpinan Roh Kudus untuk membawa jiwa - jiwa kepada pengenalan akan Kristus dan menerapkan gaya hidup seperti Kristus. 
+    Dimulai pada tahun 1999 dalam bentuk Persekutuan kecil yang dihadiri 10-12 orang, dengan tuntunan Roh Kudus, CBN Church terus mengerjakan panggilannya bukan hanya di gereja lokal di Cibinong - Bogor tetapi juga membuka cabang gereja lokal di beberapa tempat di Indonesia.      <br />
+      </p>
   </div>
 </section>
 
@@ -79,12 +79,12 @@ function About() {
           alt="Gereja Masa Kini"
           className="rounded-lg shadow-lg w-full object-cover"
         />
-        <div className="absolute bottom-0 left-0 bg-gray-500 bg-opacity-75 p-6 text-white rounded-lg">
+        {/* <div className="absolute bottom-0 left-0 bg-gray-500 bg-opacity-75 p-6 text-white rounded-lg">
           <h3 className="text-xl font-bold">Visi Gereja</h3>
           <p className="mt-2">
             Tuhan memberikan visi kepada Ps. Hendrawan untuk membawa 5000 jiwa kepada Kristus. Visi ini menjadi landasan pelayanan gereja hingga saat ini.
           </p>
-        </div>
+        </div> */}
       </div>
 
       <div className="space-y-6">
@@ -109,11 +109,11 @@ function About() {
   <VisiMisi/> 
 
 
-
       {/* Values Section */}
       <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-6 text-center">
-          <h2 className="text-3xl font-bold mb-6">Our Values</h2>
+        <h2 className="text-5xl md:text-6xl font-bold mb-10">7 Pilar gereja</h2>
+
           <ul className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {["Faith", "Love", "Community", "Service", "Integrity", "Growth"].map((value, index) => (
               <li
@@ -225,13 +225,14 @@ function About() {
   </div>
 </section>
 
+<StrukturOrganisasi/>
 
 
       {/* Footer */}
   
       <div className="max-w-7xl mx-auto px-6 py-12">
           {/* Lokasi Header */}
-          <h2 className="text-3xl font-bold text-center text-gray-900 mb-6">LOKASI GEREJA</h2>
+          <h2 className="text-5xl font-bold text-center text-gray-900 mb-6">LOKASI GEREJA</h2>
 
           {/* Google Map Embed */}
           <div className="flex justify-center">
