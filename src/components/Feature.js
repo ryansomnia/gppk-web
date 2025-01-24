@@ -60,7 +60,7 @@ function Feature() {
 
         {/* Jadwal KKA */}
         <a
-          href="http://localhost:3000/ministry"
+          href="https://gppkcbn.org/kka"
           className="flex flex-col items-center no-underline"
         >
           <div className="w-14 md:w-20 h-14 md:h-20 sm:w-24 sm:h-24 lg:w-32 lg:h-32 bg-blue-500 flex items-center justify-center rounded-full text-2xl sm:text-3xl lg:text-4xl text-white hover:bg-blue-600">

@@ -1,8 +1,48 @@
 import React from "react";
 import VisiMisi from "../components/VisiMisi";
 import StrukturOrganisasi from "../components/StrukturOrganisasi";
+import { useQuery } from "@tanstack/react-query";
 
+import axios from "axios";
+
+const fetchCabangData = async () => {
+  const response = await axios.get(
+    "https://api.gppkcbn.org/cbn/v1/cabang/getAllData",
+    {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
+
+  if (response.data.code !== 200) {
+    throw new Error("Failed to load carousel data");
+  }
+
+  return response.data.data;
+};
 function About() {
+  const {
+    data: cabangData = [],
+    isLoading,
+    error,
+  } = useQuery({
+    queryKey: ["cabangData"],
+    queryFn: fetchCabangData,
+  });
+   // Handle error state
+   if (error) {
+    // return <div className="error">Error: {error.message}</div>;
+    console.log(`error: ${error.message}`);
+    return null; // Don't render anything
+  }
+
+  // Handle empty data
+  if (cabangData.length === 0) {
+    console.log("cabang data is empty");
+    return null; // Don't render anything
+  }
+
   return (
     <div className=" text-gray-800 font-sans">
 
@@ -138,85 +178,28 @@ function About() {
   <div className="max-w-7xl mx-auto px-6 text-center">
     <h2 className="text-5xl md:text-6xl font-bold mb-10">Cabang CBN</h2>
     <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
-      {[
-        {
-          name: "CBN Anugerah Sidikalang",
-          img: "https://images.pexels.com/photos/358574/pexels-photo-358574.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260",
-          // year: "1995",
-          pastor: "Ps. Karman Situmorang",
-          address: "Kec. Sidikalang, Kabupaten Dairi, Sumatera Utara",
-        },
-        {
-          name: "CBN Tambah Agung Lampung Timur",
-          img: "https://images.pexels.com/photos/1433052/pexels-photo-1433052.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260",
-          // year: "2000",
-          pastor: "Ps. Harol W Thamiend",
-          address: "RT 21 Dusun VI Tambah Agung Desa negeri Agung. Kec Gunung Pelindung Kab. Lampung Timur",
-        },
-        {
-          name: "CBN Mandalasari Lampung",
-          img: "https://images.pexels.com/photos/34950/pexels-photo.jpg?auto=compress&cs=tinysrgb&h=750&w=1260",
-          // year: "2010",
-          pastor: "Ps. Barnabas Bahari",
-          address: "Dusun 06 Sendang Rejo, Mandalasari, Kec Mataram Baru, Kab. Lampung Timur",
-        },
-        {
-          name: "CBN Imanuel Tigalingga",
-          img: "https://images.pexels.com/photos/325185/pexels-photo-325185.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260",
-          // year: "2005",
-          pastor: "Ps. Ramses Silaban",
-          address: "Desa Tigalingga, Kab. Dairi Sumatera Utara",
-        },
-        {
-          name: "CBN Kasih Karunia Silamboyah",
-          img: "https://images.pexels.com/photos/221457/pexels-photo-221457.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260",
-          // year: "1998",
-          pastor: "Ps. Alboin Munthe",
-          address: "Desa. Silumboyah, Kec. Sidikalang, Sumatera Utara",
-        },
-        {
-          name: "CBN Agape Magetan",
-          img: "https://images.pexels.com/photos/158607/cairn-fog-mystical-background-158607.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260",
-          // year: "2015",
-          pastor: "Ps. Elisabeth",
-          address: " Jl. Raya Sarangan No.73 Plaosan RT.02/ RW 01. Magetan Jawa Timur",
-        },
-        {
-          name: "CBN Gosyen Manado ",
-          img: "https://images.pexels.com/photos/356016/pexels-photo-356016.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260",
-          // year: "2003",
-          pastor: "Ps. Lexi Adilang",
-          address: "RW.Lingk. 5, Karombasan Utara, Kec. Wanea, Kota Manado, Sulawesi Utara",
-        },
-        {
-          name: "CBN Sinehu",
-          img: "https://images.pexels.com/photos/208817/pexels-photo-208817.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260",
-          // year: "2007",
-          pastor: "Ps. Ramses Silaban",
-          address: "Desa Sinehu, Tigalingga, Kab. Dairi, Sumatera Utara",
-        }
-      ].map((branch, index) => (
+      {cabangData.map((item) => (
         <div
-          key={index}
+          key={item.id}
           className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition"
         >
           <div className="relative overflow-hidden">
             <img
-              src={branch.img}
-              alt={branch.name}
+              src={item.img}
+              alt={item.namaCabang}
               className="h-48 w-full object-cover transition-transform duration-300 transform hover:scale-110"
             />
           </div>
           <div className="p-3 md:p-4 text-start">
-            <h3 className="text-sm md:text-xl font-semibold text-gray-800">{branch.name}</h3>
+            <h3 className="text-sm md:text-xl font-semibold text-gray-800">{item.namaCabang}</h3>
             {/* <p className="text-sm text-gray-600 mt-2">
               <strong>Year Established:</strong> {branch.year}
             </p> */}
             <p className="text-sm text-gray-600">
-              <strong>Gembala:</strong> {branch.pastor}
+              <strong>Gembala:</strong> {item.pastor}
             </p>
             <p className="text-sm text-gray-600">
-              <strong>Alamat:</strong> {branch.address}
+              <strong>Alamat:</strong> {item.address}
             </p>
           </div>
         </div>
