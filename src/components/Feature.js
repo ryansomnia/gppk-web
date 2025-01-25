@@ -1,12 +1,12 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
 function Feature() {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
-  const handleNavigateToFormJemaat = () => {
-    navigate("/form-jemaat");
-  };
+  // const handleNavigateToFormJemaat = () => {
+  //   navigate("/form-jemaat");
+  // };
 
   return (
     <div className="flex flex-col items-center my-10 sm:mb-20 px-4">
