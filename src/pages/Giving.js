@@ -55,7 +55,7 @@ function Giving() {
        <div className="parallax" 
       style={{ backgroundImage: `url(${images[currentImage]})` }}>
       <div className="overlay-content">
-        <h1>MEMBERI</h1>
+        <h1>MEMBERI PERSEMBAHAN <br/>KEPADA TUHAN</h1>
         {/* <p>Bagi Jemaat yang tergerak untuk memberi dukungan dana pelayanan kami</p> */}
       </div>
     </div>
@@ -63,21 +63,22 @@ function Giving() {
         
         {/* Section 1: Donation Information */}
         <section className="giving-info">
-          <h1>Support Our Church</h1>
-          <p>Your donations help us continue our mission and reach more people with the love of Christ.</p>
+          <h3>Jemaat bisa memberikan persembahan :</h3>
+          {/* <p>Your donations help us continue our mission and reach more people with the love of Christ.</p> */}
           <div className="bank-info">
-            <h2>Bank Transfer Information:</h2>
+            {/* <h2>Bank Transfer Information:</h2> */}
             <ul>
-              <li>Bank Name: ABC Bank</li>
-              <li>Account Number: 1234-5678-91011</li>
-              <li>Account Name: GPPK CBN Church</li>
+              <li>Persembahan Kolekte</li>
+              <li>Persembahan Persepuluhan</li>
+              <li>Persembahan Syukur</li>
+              <li>Persembahan Diakonia dan Misi</li>
+              <li>Persembahan Buah Sulung</li>
+
             </ul>
-            <p>You can also give through:</p>
-            <ul>
-              <li>Online Giving - Visit our website for secure online donations.</li>
-              <li>In-Person - Offerings can be made during Sunday services.</li>
-              <li>Mail - Send your gifts to Church Address.</li>
-            </ul>
+            <p>Persembahan bisa ditransferkan ke :</p>
+            <div className='bg-blue-500 rounded-lg'>
+              <h3 className='text-white p-3 text-center font-bold'>BCA - 2111529908</h3>
+            </div>
           </div>
         </section>
 
