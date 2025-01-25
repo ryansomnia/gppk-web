@@ -154,19 +154,49 @@ function About() {
         <div className="max-w-7xl mx-auto px-6 text-center">
         <h2 className="text-5xl md:text-6xl font-bold mb-10">7 Pilar gereja</h2>
 
-          <ul className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            {["Faith", "Love", "Community", "Service", "Integrity", "Growth"].map((value, index) => (
-              <li
-                key={index}
-                className="bg-blue-50 p-6 rounded-lg shadow-md hover:bg-blue-100 transition"
-              >
-                <h3 className="text-xl font-semibold">{value}</h3>
-                <p className="text-gray-600 mt-2">
-                  We believe in {value.toLowerCase()} as a cornerstone of our mission.
-                </p>
-              </li>
-            ))}
-          </ul>
+        <ul className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 list-none">
+  {[{ 
+      title: "1. PROFESSIONAL PASTORAL LEADERSHIP", 
+      description: "Memiliki kepemimpinan pastoral yang handal" 
+    },
+    { 
+      title: "2. INSPIRING WORSHIP SERVICE", 
+      description: "Ibadah yang mewahyuhkan" 
+    },
+    { 
+      title: "3. EXTENSIVE PRAYER NETWORK", 
+      description: "Memiliki jaringan doa yang menyebar luas" 
+    },
+    { 
+      title: "4. TO EQUIPT THE ALL HUMBLE MEMBERS FOR THE SERVICES AN TO BUILT THE BODY OF CHRIST", 
+      description: "Memiliki jemaat yang rendah hati dan mau diperlengkapi untuk pekerjaan dan Pembangunan Tubuh Kristus" 
+    },
+    { 
+      title: "5. LIFE CHANGING FOR SMALL GROUP OR FAMILY OF GOD", 
+      description: "Memiliki kelompok kecil atau Keluarga Kerajaan Allah (KKA) yang mengubah kehidupan" 
+    },
+    { 
+      title: "6. EFICIENT CONGRATIONAL CARE BEETWEEN MEMBERS TO MEMBERS", 
+      description: "Memiliki kepedulian jemaat kepada jemaat yang efisien" 
+    },
+    { 
+      title: "7. ACCOUNTABLE AND HONEST PROFESSIONAL ADMINISTRATION", 
+      description: "Memiliki administrasi yang dapat dipertanggungjawabkan yang diolah oleh orang – orang yang bersih dan professional" 
+    },
+  ].map((item, index, array) => (
+    <li
+      key={index}
+      className={`bg-blue-50 p-6 rounded-lg shadow-md hover:bg-blue-100 transition ${
+        index === array.length - 1 ? "lg:col-span-3 text-center" : ""
+      }`}
+    >
+    <h3 className="text-xl font-semibold">{item.title}</h3>
+    <p className="text-gray-600 mt-2">{item.description}</p>
+     
+    </li>
+  ))}
+</ul>
+
         </div>
       </section>
 
