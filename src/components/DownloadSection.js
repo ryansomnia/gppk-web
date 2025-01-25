@@ -6,7 +6,7 @@ const DownloadSection = () => {
   useEffect(() => {
     const fetchMateri = async () => {
       try {
-        const response = await fetch("http://localhost:3013/cbn/v1/artikel/bahanKKA", {
+        const response = await fetch("https://api.gppkcbn.org/cbn/v1/artikel/bahanKKA", {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
