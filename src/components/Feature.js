@@ -16,7 +16,7 @@ function Feature() {
       </h1>
 
       {/* Feature Items */}
-      <div className="grid grid-cols-5 gap-4 sm:grid-cols-3 lg:grid-cols-5 text-center">
+      <div className="grid grid-cols-4 gap-4 sm:grid-cols-3 lg:grid-cols-4 text-center ">
         {/* Daftar KJ */}
         {/* <div
           className="flex flex-col items-center cursor-pointer"
