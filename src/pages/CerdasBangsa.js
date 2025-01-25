@@ -128,6 +128,17 @@ Maka didirikanlah sekolah TK Cerdas Bangsa pada tahun 2006 dibawah naungan Yayas
                 </div>
               </div>
             </section>
+            {/* Visit Website Button */}
+            <section className="text-center mt-12">
+              <a
+                href="https://sekolahcerdasbangsa.sch"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block no-underline bg-green-600 text-white text-lg font-medium w-auto  px-6 py-3 rounded-xl shadow-md hover:bg-green-700 transition duration-200"
+              >
+                Kunjungi Website Kami
+              </a>
+            </section>
 
           </div>
         </div>
