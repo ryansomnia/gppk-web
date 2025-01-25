@@ -55,8 +55,8 @@ const BannerBibleStatic = () => {
   <h1 className="sm:text-6xl text-4xl font-bold mb-5 sm:mb-20 text-center  text-gray-800">
     Renungan 3M
   </h1>
-<div className='flex'>
-  <div className=' flex w-2/3 justify-center items-center  '>
+<div className='flex flex-col sm:flex-row'>
+  <div className=' flex  w-full sm:w-2/3 justify-center items-center  '>
   <img
       src="/images/3m.jpeg" // Ganti dengan path gambar Anda
       alt="Descriptive Alt Text"

@@ -73,7 +73,7 @@ function About() {
   <div className="max-w-7xl mx-auto px-6 lg:px-8">
     {/* Header Section */}
     <div className="text-center mb-12">
-      <h2 className="text-4xl font-bold text-gray-800 mb-4">Sejarah Singkat GPPK CBN</h2>
+      <h2 className="text-4xl font-bold text-gray-800 mb-4">Sejarah Singkat CBN Church</h2>
       <p className="text-lg text-gray-600">
         Menelusuri perjalanan iman dari awal mula yang sederhana hingga menjadi gereja yang berdampak bagi banyak jiwa di Indonesia.
       </p>
@@ -152,7 +152,7 @@ function About() {
       {/* Values Section */}
       <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-6 text-center">
-        <h2 className="text-5xl md:text-6xl font-bold mb-10">7 Pilar gereja</h2>
+        <h2 className="text-5xl md:text-6xl font-bold mb-10">7 Pilar gereja CBN Church</h2>
 
         <ul className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 list-none">
   {[{ 
@@ -206,7 +206,7 @@ function About() {
 {/* Branches Section */}
 <section className="py-16 bg-gray-50">
   <div className="max-w-7xl mx-auto px-6 text-center">
-    <h2 className="text-5xl md:text-6xl font-bold mb-10">Cabang CBN</h2>
+    <h2 className="text-5xl md:text-6xl font-bold mb-10">Cabang CBN Church</h2>
     <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
       {cabangData.map((item) => (
         <div
