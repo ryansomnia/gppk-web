@@ -18,7 +18,7 @@ function Feature() {
       {/* Feature Items */}
       <div className="grid grid-cols-5 gap-4 sm:grid-cols-3 lg:grid-cols-5 text-center">
         {/* Daftar KJ */}
-        <div
+        {/* <div
           className="flex flex-col items-center cursor-pointer"
           onClick={handleNavigateToFormJemaat}
         >
@@ -26,7 +26,7 @@ function Feature() {
             <i className="fas fa-book"></i>
           </div>
           <p className="mt-2 text-gray-800 text-[10px] sm:text-sm">Daftar KJ</p>
-        </div>
+        </div> */}
 
         {/* YouTube */}
         <div className="flex flex-col items-center">
@@ -70,12 +70,17 @@ function Feature() {
         </a>
 
         {/* Pastoral Care */}
+        <a
+          href="https://gppkcbn.org/service"
+          className="flex flex-col items-center no-underline"
+        >
         <div className="flex flex-col items-center">
           <div className="w-14 md:w-20 h-14 md:h-20 sm:w-24 sm:h-24 lg:w-32 lg:h-32 bg-green-500 flex items-center justify-center rounded-full text-2xl sm:text-3xl lg:text-4xl text-white hover:bg-green-600">
             <i className="fas fa-praying-hands"></i>
           </div>
           <p className="mt-2 text-gray-800 text-[8px] sm:text-sm">Pastoral Care</p>
         </div>
+        </a>
       </div>
     </div>
   );
