@@ -86,15 +86,18 @@ const KomselSection = () => {
           </p>
         </div>
 
-        <div className="mb-6">
-          <input
-            type="text"
-            placeholder="Cari nama, area, atau kalangan (umum, youth, kids)"
-            className="w-full p-3 border rounded-md shadow-sm focus:outline-none focus:ring focus:ring-indigo-300"
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-          />
-        </div>
+        <div className="mb-6 relative">
+  <input
+    type="text"
+    placeholder="Cari nama, area, atau kaladddngan (umum, youth, kids)"
+    className=" w-full p-4 pl-12 border border-yellow-300 rounded-lg shadow-md bg-yellow-100 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:bg-white transition duration-200"
+    value={searchTerm}
+    onChange={(e) => setSearchTerm(e.target.value)}
+  />
+  
+  
+</div>
+
 
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
           {displayedData.map((komsel) => (

@@ -14,14 +14,13 @@ function Service() {
     { title: 'Pendaftaran Pelayanan', description: 'Every Sunday at 10:00 AM - Join us for a time of worship and community.', img: 'https://picsum.photos/id/101/300/200' }, 
     { title: 'Pemberkatan Nikah', description: 'Schedule a wedding blessing ceremony.', img: 'https://picsum.photos/id/109/300/200' },
     { title: 'Pemberkatan Rumah', description: 'Support for new births and family ceremonies.', img: 'https://picsum.photos/id/106/300/200' },
-    { title: 'Pelayanan Kedukaan', description: 'Arrangements for funerals and memorials.', img: 'https://picsum.photos/id/107/300/200' },
+    { title: 'Penyerahan Anak', description: 'Serahkan anak mu sekarang juga', img: 'https://picsum.photos/id/107/300/200' },
   ];
   const handleNavigation = (link) => {
     navigate(`/${link}`); // Navigasi ke halaman berdasarkan link
   };
   return (
     <div className="service-page">
-      <DownloadSection/>
       <h1>Our Services</h1>
       <div className="service-grid">
         {services.map((service, index) => (
