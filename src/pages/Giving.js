@@ -28,7 +28,7 @@ function Giving() {
       caption: 'Children’s Ministry Event',
     },
     {
-      image: 'https://picsum.photos/id/1013/600/400',
+      image: 'https://picsum.photos/id/1016/600/400',
       caption: 'Sunday Worship Service',
     },
     {
