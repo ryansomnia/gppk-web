@@ -17,6 +17,7 @@ import FormDoa from './components/form/FormDoa';
 import RenunganDetail from './components/RenunganDetail';
 import KKA from './pages/KKA';
 import MembacaDetail from './components/MembacaDetail';
+import KesaksianDetail from './components/KesaksianDetail';
   // "port": "3010",
 
 function App() {
@@ -31,6 +32,7 @@ function App() {
           <Route path="/news" element={<News />} />
           <Route path="/article/:id" element={<RenunganDetail />} />
           <Route path="/membaca/:id" element={<MembacaDetail />} />
+          <Route path="/kesaksian/:id" element={<KesaksianDetail />} />
           <Route path="/service" element={<Service />} />
           <Route path="/kka" element={<KKA />} />
 
