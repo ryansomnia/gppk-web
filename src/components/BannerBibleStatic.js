@@ -84,13 +84,7 @@ const BannerBibleStatic = () => {
               .format("dddd, DD MMMM YYYY")}
           </p>
 
-          <div className="text-[8px] sm:text-sm text-gray-600 mb-3 line-clamp-3">
-            <span
-              dangerouslySetInnerHTML={{
-                __html: item.content,
-              }}
-            ></span>
-          </div>
+          
           <Link
             to={`/membaca/${item.idArtikel}`}
             className="inline-block text-xs sm:text-sm no-underline text-white bg-blue-500 px-2 py-1 sm:px-3 sm:py-1 rounded hover:bg-blue-600 transition-colors"
