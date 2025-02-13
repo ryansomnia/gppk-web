@@ -19,6 +19,8 @@ import KKA from './pages/KKA';
 import MembacaDetail from './components/MembacaDetail';
 import KesaksianDetail from './components/KesaksianDetail';
 import CerdasBangsa from './pages/CerdasBangsa';
+import FormBaptisan from './components/form/FormBaptisan';
+import FormKonseling from './components/form/FormKonseling';
   // "port": "3010",
 
 function App() {
@@ -43,6 +45,8 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/form-jemaat" element={<FormJemaat />} />
           <Route path="/formDoa" element={<FormDoa />} />
+          <Route path="/formBaptisan" element={<FormBaptisan />} />
+          <Route path="/formKonseling" element={<FormKonseling />} />
 
         </Routes>
         <Footer />
