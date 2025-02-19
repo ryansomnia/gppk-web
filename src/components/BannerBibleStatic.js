@@ -58,7 +58,7 @@ const BannerBibleStatic = () => {
 <div className='flex flex-col sm:flex-row'>
   <div className=' flex  w-full sm:w-2/3 justify-center items-center  '>
   <img
-      src="/images/3m.jpeg" // Ganti dengan path gambar Anda
+      src="/images/3mm.png" // Ganti dengan path gambar Anda
       alt="Descriptive Alt Text"
       className="w-full h-auto object-cover"
     />
