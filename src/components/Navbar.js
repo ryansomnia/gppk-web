@@ -34,7 +34,7 @@ function Navbar() {
           <li><Link to="/giving" onClick={toggleMenu}>Persembahan</Link></li>
           <li><Link to="/cerdasbangsa" onClick={toggleMenu}>Sekolah Cerdas Bangsa</Link></li>
 
-          <li><Link to="/login" onClick={toggleMenu}>Login</Link></li>
+          {/* <li><Link to="/login" onClick={toggleMenu}>Login</Link></li> */}
         </ul>
       </nav>
 

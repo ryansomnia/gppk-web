@@ -76,7 +76,7 @@ const BannerBibleStatic = () => {
       <div className="flex flex-col sm:flex-row">
         <div className="flex w-full sm:w-2/3 justify-center items-center">
           <img
-            src={imageUrl || "/images/3mm.png"} // Menggunakan URL dari API jika tersedia
+            src={imageUrl || "/images/3m.jpg"} // Menggunakan URL dari API jika tersedia
             alt="Descriptive Alt Text"
             className="w-full h-auto object-cover"
           />

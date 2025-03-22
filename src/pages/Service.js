@@ -11,10 +11,10 @@ function Service() {
     { title: 'Permohonan Baptisan', description: 'Submit a prayer request for your needs.', img: 'https://picsum.photos/id/108/300/200',link:'formBaptisan' },
     { title: 'Konseling', description: 'Sundays at 9:00 AM - A dedicated time for children to learn and grow in their faith.', img: 'https://picsum.photos/id/103/300/200',link:'formKonseling' },
     { title: 'Pelayan Kartu Jemaat', description: 'Assistance with church member services.', img: 'https://picsum.photos/id/104/300/200', link:'form-jemaat' },
-    { title: 'Pendaftaran Pelayanan', description: 'Every Sunday at 10:00 AM - Join us for a time of worship and community.', img: 'https://picsum.photos/id/101/300/200' }, 
-    { title: 'Pemberkatan Nikah', description: 'Schedule a wedding blessing ceremony.', img: 'https://picsum.photos/id/109/300/200' },
-    { title: 'Pemberkatan Rumah', description: 'Support for new births and family ceremonies.', img: 'https://picsum.photos/id/106/300/200' },
-    { title: 'Penyerahan Anak', description: 'Serahkan anak mu sekarang juga', img: 'https://picsum.photos/id/107/300/200' },
+    { title: 'Pendaftaran Pelayanan', description: 'Every Sunday at 10:00 AM - Join us for a time of worship and community.', img: 'https://picsum.photos/id/101/300/200',link:'form-pelayan' }, 
+    { title: 'Pemberkatan Nikah', description: 'Schedule a wedding blessing ceremony.', img: 'https://picsum.photos/id/109/300/200',  link:'form-peneguhan-nikah' },
+    { title: 'Pemberkatan Rumah', description: 'Support for new births and family ceremonies.', img: 'https://picsum.photos/id/106/300/200',link:'form-pemberkatan-rumah' },
+    { title: 'Penyerahan Anak', description: 'Serahkan anak mu sekarang juga', img: 'https://picsum.photos/id/107/300/200', link:'form-penyerahan-anak'},
   ];
   const handleNavigation = (link) => {
     navigate(`/${link}`); // Navigasi ke halaman berdasarkan link

@@ -1,189 +1,263 @@
-import React, { useState } from 'react';
-import { useMutation } from '@tanstack/react-query';
+import React, { useState, useEffect } from 'react';
+import { TextField, Button, Typography, Grid, Box, Paper, FormControl, RadioGroup, FormControlLabel, Radio, Checkbox, FormGroup, Alert, Snackbar } from '@mui/material';
 import axios from 'axios';
-import Swal from 'sweetalert2';
+import { useMutation } from '@tanstack/react-query';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 
-const FormBaptisan = () => {
+function BaptisanAirForm() {
   const [formData, setFormData] = useState({
-    fullName: '',
-    birthPlace: '',
-    birthDate: '',
-    gender: '',
+    namaLengkap: '',
+    tempatLahir: '',
+    tanggalLahir: '',
+    alamat: '',
+    noHP: '',
+    pendidikanTerakhir: '',
+    pekerjaan: '',
+    kka: '',
     status: '',
-    contactInfo: '',
-    address: '',
-    hasKKA: '',
-    kkaName: '',
-  });
+    tanggalMenikah: '',
+    kepercayaanLama: '',
+    jumlahKeluarga: 0,
+    keluarga: [],
 
-  const handleChange = (e) => {
+  });
+  
+
+  const [checklist, setChecklist] = useState('0'); // Inisialisasi dengan '0'
+  const [isSubmitDisabled, setIsSubmitDisabled] = useState(true);
+  const [openSnackbar, setOpenSnackbar] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState('');
+  const [snackbarSeverity, setSnackbarSeverity] = useState('success');
+  const navigate = useNavigate(); // Inisialisasi navigate
+
+  const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
+    if (name === 'jumlahKeluarga') {
+      let jumlah = parseInt(value, 10);
+      if (isNaN(jumlah)) {
+        jumlah = 0;
+      }
+      jumlah = Math.max(0, jumlah);
+      const keluargaBaru = formData.keluarga.slice(0, jumlah);
+      for (let i = keluargaBaru.length; i < jumlah; i++) {
+        keluargaBaru.push({
+          nama: '',
+          hubungan: '',
+          statusMenikah: '',
+          usia: '',
+          agama: '',
+          sudahDibaptis: '',
+        });
+      }
+      setFormData({ ...formData, jumlahKeluarga: jumlah, keluarga: keluargaBaru });
+    } else {
+      setFormData({ ...formData, [name]: value });
+    }
   };
 
-  const mutation = useMutation({
-    mutationFn: async (newData) => {
-      const response = await axios.post(
-        'https://api.gppkcbn.org/cbn/v1/service/baptisan',
-        newData,
-        { headers: { 'Content-Type': 'application/json' } }
-      );
-      if (response.status !== 201) {
-        throw new Error('Gagal mengirim data');
+  const handleKeluargaChange = (index, e) => {
+    const { name, value } = e.target;
+    const newKeluarga = [...formData.keluarga];
+    newKeluarga[index][name] = value;
+    setFormData({ ...formData, keluarga: newKeluarga });
+  };
+  const handleChecklistChange = (e) => {
+    setChecklist(e.target.checked ? '1' : '0');
+  };
+
+  useEffect(() => {
+    let isFormFilled = true;
+    for (const key in formData) {
+      if (key === 'tanggalMenikah' && formData.status === 'Belum') {
+        continue;
       }
-      return response.data;
-    },
+      if (formData[key] === '') {
+        isFormFilled = false;
+        break;
+      }
+    }
+    setIsSubmitDisabled(!(isFormFilled && checklist === '1'));
+  }, [formData, checklist]);
+
+  const mutation = useMutation({
+    mutationFn: (data) => axios.post('https://api.gppkcbn.org/cbn/v1/service/baptisan/addFormBaptisan', data),
     onSuccess: () => {
-      Swal.fire({
-        icon: 'success',
-        title: 'Berhasil!',
-        text: 'Data baptisan berhasil dikirim.',
+      setFormData({
+        namaLengkap: '',
+        tempatLahir: '',
+        tanggalLahir: '',
+        alamat: '',
+        noHP: '',
+        pendidikanTerakhir: '',
+        pekerjaan: '',
+        kka: '',
+        status: '',
+        tanggalMenikah: '',
+        kepercayaanLama: '',
+        jumlahKeluarga: 0,
+        keluarga: [],
       });
-      setFormData({ fullName: '', birthPlace: '', birthDate: '', gender: '', status: '', contactInfo: '', address: '', hasKKA: '', kkaName: '' });
+      setChecklist('0');
+      setSnackbarMessage('Formulir berhasil dikirim!');
+      setSnackbarSeverity('success');
+      setOpenSnackbar(true);
+      setTimeout(() => {
+        navigate('/'); // Redirect ke halaman home
+      }, 2000); // Redirect setelah 2 detik
     },
-    onError: () => {
-      Swal.fire({
-        icon: 'error',
-        title: 'Gagal!',
-        text: 'Gagal mengirim data. Silakan coba lagi.',
-      });
+    onError: (error) => {
+      setSnackbarMessage(`Gagal mengirim formulir: ${error.message}`);
+      setSnackbarSeverity('error');
+      setOpenSnackbar(true);
     },
   });
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    mutation.mutate(formData);
+    if (!isSubmitDisabled) {
+      const dataToSend = {
+        ...formData,
+        status: formData.status || null,
+        tanggalMenikah: formData.tanggalMenikah || null,
+        checklist: checklist,
+      };
+      mutation.mutate(dataToSend);
+    }
   };
-
+  const handleCloseSnackbar = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setOpenSnackbar(false);
+  };
   return (
-    <div className="max-w-lg mx-auto bg-white p-6 rounded-lg shadow-md mt-10">
-      <h2 className="text-2xl font-bold text-center mb-4">Form Baptisan</h2>
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <div>
-          <label className="block text-gray-700">Nama Lengkap:</label>
-          <input
-            type="text"
-            name="fullName"
-            value={formData.fullName}
-            onChange={handleChange}
-            required
-            className="w-full p-2 border border-gray-300 rounded-md"
-          />
-        </div>
-        <div className="grid grid-cols-2 gap-4">
-          <div>
-            <label className="block text-gray-700">Tempat Lahir:</label>
-            <input
-              type="text"
-              name="birthPlace"
-              value={formData.birthPlace}
-              onChange={handleChange}
-              required
-              className="w-full p-2 border border-gray-300 rounded-md"
-            />
-          </div>
-          <div>
-            <label className="block text-gray-700">Tanggal Lahir:</label>
-            <input
-              type="date"
-              name="birthDate"
-              value={formData.birthDate}
-              onChange={handleChange}
-              required
-              className="w-full p-2 border border-gray-300 rounded-md"
-            />
-          </div>
-        </div>
-        <div className="grid grid-cols-2 gap-4">
-          <div>
-            <label className="block text-gray-700">Jenis Kelamin:</label>
-            <select
-              name="gender"
-              value={formData.gender}
-              onChange={handleChange}
-              required
-              className="w-full p-2 border border-gray-300 rounded-md"
-            >
-              <option value="">Pilih Jenis Kelamin</option>
-              <option value="Laki-laki">Laki-laki</option>
-              <option value="Perempuan">Perempuan</option>
-            </select>
-          </div>
-          <div>
-            <label className="block text-gray-700">Status:</label>
-            <select
-              name="status"
-              value={formData.status}
-              onChange={handleChange}
-              required
-              className="w-full p-2 border border-gray-300 rounded-md"
-            >
-              <option value="">Pilih Status</option>
-              <option value="Lajang">Lajang</option>
-              <option value="Menikah">Menikah</option>
-              <option value="Duda/Janda">Duda/Janda</option>
-            </select>
-          </div>
-        </div>
-        <div>
-          <label className="block text-gray-700">Nomor Handphone:</label>
-          <input
-            type="text"
-            name="contactInfo"
-            value={formData.contactInfo}
-            onChange={handleChange}
-            required
-            className="w-full p-2 border border-gray-300 rounded-md"
-          />
-        </div>
-        <div>
-          <label className="block text-gray-700">Alamat:</label>
-          <textarea
-            name="address"
-            value={formData.address}
-            onChange={handleChange}
-            required
-            className="w-full p-2 border border-gray-300 rounded-md"
-          ></textarea>
-        </div>
-        <div>
-          <label className="block text-gray-700">Sudah ber-KKA?</label>
-          <select
-            name="hasKKA"
-            value={formData.hasKKA}
-            onChange={handleChange}
-            required
-            className="w-full p-2 border border-gray-300 rounded-md"
-          >
-            <option value="">Pilih</option>
-            <option value="Ya">Ya</option>
-            <option value="Tidak">Tidak</option>
-          </select>
-        </div>
-        {formData.hasKKA === "Ya" && (
-          <div>
-            <label className="block text-gray-700">Nama KKA:</label>
-            <input
-              type="text"
-              name="kkaName"
-              value={formData.kkaName}
-              onChange={handleChange}
-              className="w-full p-2 border border-gray-300 rounded-md"
-            />
-          </div>
-        )}
-        <button
-          type="submit"
-          className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600"
-        >
-          {mutation.isLoading ? 'Mengirim...' : 'Kirim Formulir'}
-        </button>
-      </form>
-    </div>
-  );
-};
+    <Box sx={{ padding: 4 }}>
+      <Paper elevation={3} sx={{ padding: 4 }}>
+        <Typography variant="h4" gutterBottom>
+          Formulir Baptisan Air
+        </Typography>
 
-export default FormBaptisan;
+        <form onSubmit={handleSubmit}>
+          <Grid container spacing={3}>
+          <Grid item xs={12} sm={6}>
+              <TextField label="Nama Lengkap" name="namaLengkap" value={formData.namaLengkap} onChange={handleInputChange} fullWidth required />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField label="Tempat Lahir" name="tempatLahir" value={formData.tempatLahir} onChange={handleInputChange} fullWidth required />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <FormControl fullWidth>
+                <TextField label="Tanggal Lahir" name="tanggalLahir" type="date" value={formData.tanggalLahir} onChange={handleInputChange} InputLabelProps={{ shrink: true }} fullWidth required />
+              </FormControl>
+            </Grid>
+            <Grid item xs={12}>
+              <TextField label="Alamat" name="alamat" type="text" value={formData.alamat} onChange={handleInputChange} fullWidth required />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField label="No. HP" name="noHP" value={formData.noHP} onChange={handleInputChange} fullWidth required />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField label="Pendidikan Terakhir" name="pendidikanTerakhir" value={formData.pendidikanTerakhir} onChange={handleInputChange} fullWidth required />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField label="Pekerjaan" name="pekerjaan" value={formData.pekerjaan} onChange={handleInputChange} fullWidth required />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField label="KKA" name="kka" value={formData.kka} onChange={handleInputChange} fullWidth required />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <FormControl component="fieldset">
+                <RadioGroup row name="status" value={formData.status} onChange={handleInputChange}>
+                  <FormControlLabel value="Menikah" control={<Radio />} label="Menikah" />
+                  <FormControlLabel value="Belum" control={<Radio />} label="Belum" />
+                </RadioGroup>
+              </FormControl>
+            </Grid>
+            {formData.status === 'Menikah' && (
+          <Grid item xs={12} sm={6}>
+            <FormControl fullWidth>
+              <TextField label="Tanggal Menikah" name="tanggalMenikah" type="date" value={formData.tanggalMenikah} onChange={handleInputChange} InputLabelProps={{ shrink: true }} fullWidth required />
+            </FormControl>
+          </Grid>
+        )}
+            <Grid item xs={12} sm={6}>
+              <FormControl component="fieldset">
+                <Typography component="legend">Kepercayaan Lama</Typography>
+                <RadioGroup row name="kepercayaanLama" value={formData.kepercayaanLama} onChange={handleInputChange}>
+                <FormControlLabel value="Kristen" control={<Radio />} label="Kristen" />
+                  <FormControlLabel value="Islam" control={<Radio />} label="Islam" />
+                  <FormControlLabel value="Hindu" control={<Radio />} label="Hindu" />
+                  <FormControlLabel value="Budha" control={<Radio />} label="Budha" />
+                  <FormControlLabel value="Katolik" control={<Radio />} label="Katolik" />
+                  <FormControlLabel value="Lainnya" control={<Radio />} label="Lainnya" />
+                </RadioGroup>
+              </FormControl>
+            </Grid>
+
+            <Grid item xs={12} sm={6}>
+              <TextField
+                label="Jumlah Anggota Keluarga"
+                name="jumlahKeluarga"
+                type="number"
+                value={formData.jumlahKeluarga}
+                onChange={handleInputChange}
+                fullWidth
+                required
+                inputProps={{ min: 0 }}
+              />
+            </Grid>
+
+            <Grid item xs={12}>
+              <Typography variant="h6" gutterBottom>
+                Penjelasan Mengenai Keluarga
+              </Typography>
+              {formData.keluarga.map((anggota, index) => (
+                <Grid container spacing={2} key={index} sx={{ marginBottom: 2 }}>
+                  <Grid item xs={12} sm={2}>
+                    <TextField label="Nama" name="nama" value={anggota.nama} onChange={(e) => handleKeluargaChange(index, e)} fullWidth />
+                  </Grid>
+                  <Grid item xs={12} sm={2}>
+                    <TextField label="Hubungan" name="hubungan" value={anggota.hubungan} onChange={(e) => handleKeluargaChange(index, e)} fullWidth />
+                  </Grid>
+                  <Grid item xs={12} sm={2}>
+                    <TextField label="Status Menikah" name="statusMenikah" value={anggota.statusMenikah} onChange={(e) => handleKeluargaChange(index, e)} fullWidth />
+                  </Grid>
+                  <Grid item xs={12} sm={2}>
+                    <TextField label="Usia" name="usia" value={anggota.usia} onChange={(e) => handleKeluargaChange(index, e)} fullWidth />
+                  </Grid>
+                  <Grid item xs={12} sm={2}>
+                    <TextField label="Agama" name="agama" value={anggota.agama} onChange={(e) => handleKeluargaChange(index, e)} fullWidth />
+                  </Grid>
+                  <Grid item xs={12} sm={2}>
+                    <TextField label="Sudah Baptis" name="sudahDibaptis" value={anggota.sudahDibaptis} onChange={(e) => handleKeluargaChange(index, e)} fullWidth />
+                  </Grid>
+                </Grid>
+              ))}
+            </Grid>
+            <Grid item xs={12}>
+              <FormGroup>
+                <FormControlLabel
+                  control={<Checkbox checked={checklist === '1'} onChange={handleChecklistChange} />}
+                  label="Saya mengaku dengan mulut saya bahwa YESUS KRISTUS adalah TUHAN dan saya percaya di dalam hati bahwa TUHAN telah membangkitkan DIA dari antara orang mati. Saya percaya dan saya mau di BAPTIS, maka saya selamat. (Markus 16:16; Roma 10:9) Dengan ini saya menyatakan menerima BAPTISAN SELAM atas keyakinan dan kehendak saya sendiri."
+                />
+              </FormGroup>
+            </Grid>
+
+            <Grid item xs={12}>
+            <Button type="submit" variant="contained" color="primary" disabled={isSubmitDisabled}>
+                Submit
+              </Button>
+            </Grid>
+          </Grid>
+        </form>
+      </Paper>
+      <Snackbar open={openSnackbar} autoHideDuration={6000} onClose={handleCloseSnackbar} anchorOrigin={{ vertical: 'top', horizontal: 'center' }}>
+        <Alert onClose={handleCloseSnackbar} severity={snackbarSeverity} sx={{ width: '100%' }}>
+          {snackbarMessage}
+        </Alert>
+      </Snackbar>
+    </Box>
+  );
+}
+
+export default BaptisanAirForm;

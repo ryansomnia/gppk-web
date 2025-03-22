@@ -21,6 +21,12 @@ import KesaksianDetail from './components/KesaksianDetail';
 import CerdasBangsa from './pages/CerdasBangsa';
 import FormBaptisan from './components/form/FormBaptisan';
 import FormKonseling from './components/form/FormKonseling';
+import FormPenyerahanAnak from './components/form/FormPenyerahanAnak';
+import FormPeneguhanNikah from './components/form/FormPeneguhanNikah';
+import FormPelayan from './components/form/FormPelayan';
+import FormPemberkatanRumah from './components/form/FormPemberkatanRumah';
+
+
   // "port": "3010",
 
 function App() {
@@ -44,6 +50,11 @@ function App() {
           <Route path="/giving" element={<Giving />} />
           <Route path="/about" element={<About />} />
           <Route path="/form-jemaat" element={<FormJemaat />} />
+          <Route path="/form-penyerahan-anak" element={<FormPenyerahanAnak />} />
+          <Route path="/form-peneguhan-nikah" element={<FormPeneguhanNikah />} />
+          <Route path="/form-pelayan" element={<FormPelayan />} />
+          <Route path="/form-pemberkatan-rumah" element={<FormPemberkatanRumah />} />
+
           <Route path="/formDoa" element={<FormDoa />} />
           <Route path="/formBaptisan" element={<FormBaptisan />} />
           <Route path="/formKonseling" element={<FormKonseling />} />
