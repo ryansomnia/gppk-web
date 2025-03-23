@@ -19,25 +19,21 @@ function Giving() {
   // Sample data for rotating gallery
   const activities = [
     {
-      image: 'https://picsum.photos/id/1011/600/400',
-      caption: 'Community Outreach Program',
+      image: '/images/cerdasbangsanatal.png',
+      caption: 'Support Our School Cerdas Bangsa',
     },
     {
-      image: 'https://picsum.photos/id/1012/600/400',
-      caption: 'Children’s Ministry Event',
+      image: '/images/cerdasbangsanatal2.png',
+      caption: 'Event Christmas Cerdas Bangsa',
     },
     {
-      image: 'https://picsum.photos/id/1016/600/400',
-      caption: 'Sunday Worship Service',
+      image: '/images/youth.JPG',
+      caption: 'Support our Youth Ministry',
     },
     {
-      image: 'https://picsum.photos/id/1014/600/400',
-      caption: 'Church Fundraising Dinner',
-    },
-    {
-      image: 'https://picsum.photos/id/1015/600/400',
-      caption: 'Christmas Celebration',
-    },
+      image: '/images/kkaraya.JPG',
+      caption: 'Support our Community Church',
+    }
   ];
 
   const [current, setCurrent] = useState(0);
