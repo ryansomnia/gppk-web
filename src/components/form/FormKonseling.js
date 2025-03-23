@@ -29,7 +29,7 @@ const FormKonseling = () => {
       console.log('Data yang dikirim:', newData); // Tambahkan log untuk debug
 
       const response = await axios.post(
-        'http://localhost:3013/cbn/v1/service/konseling/addData', // Ganti URL API jika perlu
+        'https://api.gppkcbn.org/cbn/v1/service/konseling/addData', // Ganti URL API jika perlu
         newData,
         { headers: { 'Content-Type': 'application/json' } }
       );
