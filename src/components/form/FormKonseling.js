@@ -2,19 +2,18 @@ import React, { useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import moment from 'moment';
 
 const FormKonseling = () => {
   const [formData, setFormData] = useState({
+    jenisKonsultasi: '', // Perbaikan: Nilai awal string kosong
     fullName: '',
-    birthPlace: '',
-    birthDate: '',
-    gender: '',
-    status: '',
-    contactInfo: '',
-    address: '',
-    hasKKA: '',
-    kkaName: '',
-    counselingType: '',
+    tanggalLahir: '',
+    sex: '',
+    statusPernikahan: '',
+    noHP: '',
+    alamat: '',
+    isi: '',
   });
 
   const handleChange = (e) => {
@@ -27,8 +26,10 @@ const FormKonseling = () => {
 
   const mutation = useMutation({
     mutationFn: async (newData) => {
+      console.log('Data yang dikirim:', newData); // Tambahkan log untuk debug
+
       const response = await axios.post(
-        'https://api.gppkcbn.org/cbn/v1/service/konseling',
+        'http://localhost:3013/cbn/v1/service/konseling/addData', // Ganti URL API jika perlu
         newData,
         { headers: { 'Content-Type': 'application/json' } }
       );
@@ -43,7 +44,16 @@ const FormKonseling = () => {
         title: 'Berhasil!',
         text: 'Data konseling berhasil dikirim.',
       });
-      setFormData({ fullName: '', birthPlace: '', birthDate: '', gender: '', status: '', contactInfo: '', address: '', hasKKA: '', kkaName: '', counselingType: '' });
+      setFormData({
+        jenisKonsultasi: '', // Ubah nilai awal menjadi null atau nilai lain
+        fullName: '',
+        tanggalLahir: '',
+        sex: '',
+        statusPernikahan: '',
+        noHP: '',
+        alamat: '',
+        isi: '',
+      });
     },
     onError: () => {
       Swal.fire({
@@ -64,15 +74,15 @@ const FormKonseling = () => {
       <h2 className="text-2xl font-bold text-center mb-4">Form Konseling</h2>
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
-          <label className="block text-gray-700">Jenis Konseling:</label>
+          <label className="block text-gray-700">Jenis Konsultasi:</label>
           <select
-            name="counselingType"
-            value={formData.counselingType}
+            name="jenisKonsultasi"
+            value={formData.jenisKonsultasi}
             onChange={handleChange}
             required
             className="w-full p-2 border border-gray-300 rounded-md"
           >
-            <option value="">Pilih Jenis Konseling</option>
+            <option value="">Pilih Jenis Konsultasi</option>
             <option value="Pelayanan">Pelayanan</option>
             <option value="Pekerjaan">Pekerjaan</option>
             <option value="Keluarga">Keluarga</option>
@@ -91,67 +101,52 @@ const FormKonseling = () => {
             className="w-full p-2 border border-gray-300 rounded-md"
           />
         </div>
-        <div className="grid grid-cols-2 gap-4">
-          <div>
-            <label className="block text-gray-700">Tempat Lahir:</label>
-            <input
-              type="text"
-              name="birthPlace"
-              value={formData.birthPlace}
-              onChange={handleChange}
-              required
-              className="w-full p-2 border border-gray-300 rounded-md"
-            />
-          </div>
-          <div>
-            <label className="block text-gray-700">Tanggal Lahir:</label>
-            <input
-              type="date"
-              name="birthDate"
-              value={formData.birthDate}
-              onChange={handleChange}
-              required
-              className="w-full p-2 border border-gray-300 rounded-md"
-            />
-          </div>
+        <div>
+          <label className="block text-gray-700">Tanggal Lahir:</label>
+          <input
+            type="date"
+            name="tanggalLahir"
+            value={formData.tanggalLahir}
+            onChange={handleChange}
+            required
+            className="w-full p-2 border border-gray-300 rounded-md"
+          />
         </div>
-        <div className="grid grid-cols-2 gap-4">
-          <div>
-            <label className="block text-gray-700">Jenis Kelamin:</label>
-            <select
-              name="gender"
-              value={formData.gender}
-              onChange={handleChange}
-              required
-              className="w-full p-2 border border-gray-300 rounded-md"
-            >
-              <option value="">Pilih Jenis Kelamin</option>
-              <option value="Laki-laki">Laki-laki</option>
-              <option value="Perempuan">Perempuan</option>
-            </select>
-          </div>
-          <div>
-            <label className="block text-gray-700">Status:</label>
-            <select
-              name="status"
-              value={formData.status}
-              onChange={handleChange}
-              required
-              className="w-full p-2 border border-gray-300 rounded-md"
-            >
-              <option value="">Pilih Status</option>
-              <option value="Lajang">Lajang</option>
-              <option value="Menikah">Menikah</option>
-              <option value="Duda/Janda">Duda/Janda</option>
-            </select>
-          </div>
+        <div>
+          <label className="block text-gray-700">Jenis Kelamin:</label>
+          <select
+            name="sex"
+            value={formData.sex}
+            onChange={handleChange}
+            required
+            className="w-full p-2 border border-gray-300 rounded-md"
+          >
+            <option value="">Pilih Jenis Kelamin</option>
+            <option value="Laki-laki">Laki-laki</option>
+            <option value="Perempuan">Perempuan</option>
+          </select>
+        </div>
+        <div>
+          <label className="block text-gray-700">Status Pernikahan:</label>
+          <select
+            name="statusPernikahan"
+            value={formData.statusPernikahan}
+            onChange={handleChange}
+            required
+            className="w-full p-2 border border-gray-300 rounded-md"
+          >
+            <option value="">Pilih Status Pernikahan</option>
+            <option value="Lajang">Lajang</option>
+            <option value="Menikah">Menikah</option>
+            <option value="Duda/Janda">Duda/Janda</option>
+          </select>
         </div>
         <div>
           <label className="block text-gray-700">Nomor Handphone:</label>
           <input
             type="text"
-            name="contactInfo"
-            value={formData.contactInfo}
+            name="noHP"
+            value={formData.noHP}
             onChange={handleChange}
             required
             className="w-full p-2 border border-gray-300 rounded-md"
@@ -160,39 +155,23 @@ const FormKonseling = () => {
         <div>
           <label className="block text-gray-700">Alamat:</label>
           <textarea
-            name="address"
-            value={formData.address}
+            name="alamat"
+            value={formData.alamat}
             onChange={handleChange}
             required
             className="w-full p-2 border border-gray-300 rounded-md"
           ></textarea>
         </div>
         <div>
-          <label className="block text-gray-700">Sudah ber-KKA?</label>
-          <select
-            name="hasKKA"
-            value={formData.hasKKA}
+          <label className="block text-gray-700">Isi Konsultasi:</label>
+          <textarea
+            name="isi"
+            value={formData.isi}
             onChange={handleChange}
             required
             className="w-full p-2 border border-gray-300 rounded-md"
-          >
-            <option value="">Pilih</option>
-            <option value="Ya">Ya</option>
-            <option value="Tidak">Tidak</option>
-          </select>
+          ></textarea>
         </div>
-        {formData.hasKKA === "Ya" && (
-          <div>
-            <label className="block text-gray-700">Nama KKA:</label>
-            <input
-              type="text"
-              name="kkaName"
-              value={formData.kkaName}
-              onChange={handleChange}
-              className="w-full p-2 border border-gray-300 rounded-md"
-            />
-          </div>
-           )}
         <button
           type="submit"
           className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600"
