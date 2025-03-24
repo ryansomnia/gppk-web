@@ -4,6 +4,7 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import './index.css';
+import { HelmetProvider } from 'react-helmet-async';
 
 
 // Import React Query related functions
@@ -15,10 +16,13 @@ const queryClient = new QueryClient();
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
+        <HelmetProvider>
+
     {/* Wrap the app in QueryClientProvider */}
     <QueryClientProvider client={queryClient}>
       <App />
     </QueryClientProvider>
+    </HelmetProvider>
   </React.StrictMode>
 );
 
