@@ -23,18 +23,7 @@ const fetchBacaAlkitabData = async () => {
   return response.data.data;
 };
 
-const fetchOneMembacaAlkitab = async () => {
-  const response = await axios.get(
-    
-    "https://api.gppkcbn.org/cbn/v1/artikel/getOneMembacaAlkitab"
-  );
 
-  if (response.data.code !== 200) {
-    throw new Error("Failed to load image data");
-  }
-
-  return response.data.data[0].url;
-};
 
 const BannerBibleStatic = () => {
   const {
@@ -46,19 +35,12 @@ const BannerBibleStatic = () => {
     queryFn: fetchBacaAlkitabData,
   });
 
-  const {
-    data: imageUrl,
-    isLoading: isLoadingImage,
-    error: errorImage,
-  } = useQuery({
-    queryKey: ["oneMembacaAlkitab"],
-    queryFn: fetchOneMembacaAlkitab,
-  });
+ 
 
-  if (isLoadingBacaAlkitab || isLoadingImage) return <p>Loading data...</p>;
+  if (isLoadingBacaAlkitab ) return <p>Loading data...</p>;
 
-  if (errorBacaAlkitab || errorImage) {
-    console.log(`error: ${errorBacaAlkitab?.message || errorImage?.message}`);
+  if (errorBacaAlkitab ) {
+    console.log(`error: ${errorBacaAlkitab.message}`);
     return null; // Don't render anything
   }
 
@@ -71,16 +53,9 @@ const BannerBibleStatic = () => {
   return (
     <div className="p-4 max-w-7xl mx-auto">
       <h1 className="sm:text-6xl text-4xl font-bold mb-5 sm:mb-20 text-center text-gray-800">
-        Renungan 3M
-      </h1>
+      Renungan CBN - 3M      </h1>
       <div className="flex flex-col sm:flex-row">
-        <div className="flex w-full sm:w-2/3 justify-center items-center">
-          <img
-            src={imageUrl || "/images/3m.jpg"} // Menggunakan URL dari API jika tersedia
-            alt="Descriptive Alt Text"
-            className="w-full h-auto object-cover"
-          />
-        </div>
+    
         <div className="flex overflow-x-auto gap-2 p-4 scrollbar-thin scrollbar-thumb-blue-500 scrollbar-track-gray-200">
           {bacaAlkitabData.map((item) => (
             <div

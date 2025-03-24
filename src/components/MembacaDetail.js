@@ -49,12 +49,18 @@ const MembacaDetail = () => {
   if (!article) {
     return <p className="text-center text-red-500">Artikel tidak ditemukan.</p>;
   }
+// Ambil sedikit konten (misalnya, 100 karakter pertama)
+const shortContent = article.content.replace(/<[^>]+>/g, '').substring(0, 100) + '...';
 
   // const renderArticle = content => {
   //   return content.split('\n\n').map((paragraph, index) => (
   //     <p key={index}>{paragraph}</p>
   //   ));
   // };
+// Buat URL WhatsApp
+const shareUrl = `whatsapp://send?text=${encodeURIComponent(
+  `${article.title}\n\n${shortContent}\n\n${article.url}\n\n${window.location.href}`
+)}`;
 
   return (
     <div className="p-6 max-w-4xl mx-auto">
@@ -71,6 +77,15 @@ const MembacaDetail = () => {
   {/* {renderArticle(article.content)} */}
 </article>
       {/* <p className="text-gray-700 mb-4"> */}
+      <a
+          href={shareUrl}
+          data-action="share/whatsapp/share"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-block text-sm no-underline text-white bg-green-500 px-3 py-1 rounded hover:bg-green-600 transition-colors"
+        >
+          Share ke WhatsApp
+        </a>
       <Link
         to="/"
         className="inline-block text-sm no-underline text-white bg-blue-500 px-3 py-1 rounded hover:bg-blue-600 transition-colors"
