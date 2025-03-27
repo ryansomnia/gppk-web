@@ -18,7 +18,7 @@ function FormPemberkatanRumah() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:3013/cbn/v1/service/pemberkatanRumah/addData', formData);
+      const response = await axios.post('https://api.gppkcbn.org/cbn/v1/service/pemberkatanRumah/addData', formData);
       if (response.status === 201) {
         Swal.fire({
           icon: 'success',
