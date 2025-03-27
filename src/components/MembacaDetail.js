@@ -45,7 +45,7 @@ const MembacaDetail = () => {
   }
 
   // Ambil sedikit konten (misalnya, 100 karakter pertama)
-  const shortContent = article.content.replace(/<[^>]+>/g, '').substring(0, 100) + '...';
+  const shortContent = article.content.replace(/<[^>]+>/g, '').substring(0, 500) + '...';
 
   // Buat URL WhatsApp
   const shareUrl = `whatsapp://send?text=${encodeURIComponent(
@@ -81,7 +81,7 @@ const MembacaDetail = () => {
         </Link>
         <a
           href={`whatsapp://send?text=${encodeURIComponent(
-            `${article.title}\n\n${shortContent}\n\n${article.url}\n\n${window.location.href}`
+            `${article.title}\n\n${shortContent}\n\n${window.location.href}`
           )}`}
           data-action="share/whatsapp/share"
           target="_blank"
