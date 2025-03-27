@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { TextField, Button, Typography, Grid, Box, Paper, FormControl, InputLabel, RadioGroup, FormControlLabel, Radio } from '@mui/material';
-
+import axios from 'axios';
+import Swal from 'sweetalert2';
 function FormPeneguhanNikah() {
   const [formData, setFormData] = useState({
     namaLengkapPria: '',
@@ -32,9 +33,55 @@ function FormPeneguhanNikah() {
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(formData);
+    try {
+      const response = await axios.post('https://api.gppkcbn.org/cbn/v1/service/pernikahan/addData', formData);
+      if (response.status === 201) {
+        Swal.fire({
+          icon: 'success',
+          title: 'Berhasil!',
+          text: 'Data berhasil dikirim.',
+        });
+        setFormData({
+          namaLengkapPria: '',
+          tempatLahirPria: '',
+          tanggalLahirPria: '',
+          alamatPria: '',
+          teleponPria: '',
+          pendidikanTerakhirPria: '',
+          pekerjaanPria: '',
+          kkaPria: '',
+          wilayahPria: '',
+          namaLengkapWanita: '',
+          tempatLahirWanita: '',
+          tanggalLahirWanita: '',
+          alamatWanita: '',
+          teleponWanita: '',
+          pendidikanTerakhirWanita: '',
+          pekerjaanWanita: '',
+          kkaWanita: '',
+          wilayahWanita: '',
+          tanggalPernikahan: '',
+          jamPernikahan: '',
+          tempatPernikahan: '',
+          pelayanPernikahan: '',
+        });
+      } else {
+        Swal.fire({
+          icon: 'error',
+          title: 'Gagal!',
+          text: 'Gagal mengirim data. Silakan coba lagi.',
+        });
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      Swal.fire({
+        icon: 'error',
+        title: 'Gagal!',
+        text: 'Terjadi kesalahan. Silakan coba lagi.',
+      });
+    }
   };
 
   return (
