@@ -1,6 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import { TextField, Button, Typography, Grid, Box, Paper } from '@mui/material';
-
+import axios from 'axios';
+import Swal from 'sweetalert2';
 function FormPenyerahanAnak() {
   const [formData, setFormData] = useState({
     namaAyah: '',
@@ -30,14 +31,56 @@ function FormPenyerahanAnak() {
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(formData);
+    try {
+      const response = await axios.post('https://api.gppkcbn.org/cbn/v1/service/penyerahanAnak/addData', formData);
+      if (response.status === 201) {
+        Swal.fire({
+          icon: 'success',
+          title: 'Berhasil!',
+          text: 'Data berhasil dikirim.',
+        });
+        // Reset form
+        setFormData({
+          namaAyah: '',
+          tempatTanggalLahirAyah: '',
+          alamatAyah: '',
+          teleponAyah: '',
+          tempatTanggalBaptisAyah: '',
+          pendidikanTerakhirAyah: '',
+          pekerjaanAyah: '',
+          kkaAyah: '',
+          wilayahAyah: '',
+          namaIbu: '',
+          tempatTanggalLahirIbu: '',
+          alamatIbu: '',
+          teleponIbu: '',
+          tempatTanggalBaptisIbu: '',
+          pendidikanTerakhirIbu: '',
+          pekerjaanIbu: '',
+          kkaIbu: '',
+          wilayahIbu: '',
+          namaAnak: '',
+          tempatTanggalLahirAnak: '',
+        });
+      } else {
+        Swal.fire({
+          icon: 'error',
+          title: 'Gagal!',
+          text: 'Gagal mengirim data. Silakan coba lagi.',
+        });
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      Swal.fire({
+        icon: 'error',
+        title: 'Gagal!',
+        text: 'Terjadi kesalahan. Silakan coba lagi.',
+      });
+    }
   };
 
-  const isFormValid = useMemo(() => {
-    return Object.values(formData).every((value) => value !== '');
-  }, [formData]);
 
   return (
     <Box sx={{ padding: 4 }}>
@@ -109,9 +152,8 @@ function FormPenyerahanAnak() {
               <Button
                 type="submit"
                 variant="contained"
-                disabled={!isFormValid}
                 sx={{
-                  backgroundColor: isFormValid ? 'primary.main' : 'grey',
+                  backgroundColor: 'primary.main',
                   width: '100%',
                   height: '50px',
                 }}
