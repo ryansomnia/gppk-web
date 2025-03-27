@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { TextField, Button, Typography, Grid, Box, Paper } from '@mui/material';
 
 function FormPenyerahanAnak() {
@@ -35,6 +35,10 @@ function FormPenyerahanAnak() {
     console.log(formData);
   };
 
+  const isFormValid = useMemo(() => {
+    return Object.values(formData).every((value) => value !== '');
+  }, [formData]);
+
   return (
     <Box sx={{ padding: 4 }}>
       <Paper elevation={3} sx={{ padding: 4 }}>
@@ -43,72 +47,75 @@ function FormPenyerahanAnak() {
         </Typography>
 
         <form onSubmit={handleSubmit}>
-          <Grid container spacing={3}>
-            <Grid item xs={12} md={6}>
+          <Grid container spacing={2}> {/* Mengurangi spacing untuk responsivitas */}
+            <Grid item xs={12} sm={6}> {/* Menggunakan sm untuk breakpoint tablet */}
               <TextField label="Nama Ayah" name="namaAyah" value={formData.namaAyah} onChange={handleInputChange} fullWidth required />
             </Grid>
-            <Grid item xs={12} md={6}>
+            <Grid item xs={12} sm={6}>
               <TextField label="Tempat/Tanggal Lahir Ayah" name="tempatTanggalLahirAyah" value={formData.tempatTanggalLahirAyah} onChange={handleInputChange} fullWidth required />
             </Grid>
             <Grid item xs={12}>
-              <TextField label="Alamat Ayah" name="alamatAyah" value={formData.alamatAyah} onChange={handleInputChange} fullWidth required />
+              <TextField placeholder="Alamat Ayah" multiline rows={2} label="Alamat Ayah" name="alamatAyah" value={formData.alamatAyah} onChange={handleInputChange} fullWidth required />
             </Grid>
-            <Grid item xs={12} md={6}>
+            <Grid item xs={12} sm={6}>
               <TextField label="Telepon Ayah" name="teleponAyah" value={formData.teleponAyah} onChange={handleInputChange} fullWidth required />
             </Grid>
-            <Grid item xs={12} md={6}>
+            <Grid item xs={12} sm={6}>
               <TextField label="Tempat/Tanggal Baptis Ayah" name="tempatTanggalBaptisAyah" value={formData.tempatTanggalBaptisAyah} onChange={handleInputChange} fullWidth />
             </Grid>
-            <Grid item xs={12} md={6}>
+            <Grid item xs={12} sm={6}>
               <TextField label="Pendidikan Terakhir Ayah" name="pendidikanTerakhirAyah" value={formData.pendidikanTerakhirAyah} onChange={handleInputChange} fullWidth required />
             </Grid>
-            <Grid item xs={12} md={6}>
+            <Grid item xs={12} sm={6}>
               <TextField label="Pekerjaan Ayah" name="pekerjaanAyah" value={formData.pekerjaanAyah} onChange={handleInputChange} fullWidth required />
             </Grid>
-            <Grid item xs={12} md={6}>
+            <Grid item xs={12} sm={6}>
               <TextField label="KKA Ayah" name="kkaAyah" value={formData.kkaAyah} onChange={handleInputChange} fullWidth required />
             </Grid>
-            <Grid item xs={12} md={6}>
-              <TextField label="Wilayah Ayah" name="wilayahAyah" value={formData.wilayahAyah} onChange={handleInputChange} fullWidth required />
-            </Grid>
 
-            <Grid item xs={12} md={6}>
+            <Grid item xs={12} sm={6}>
               <TextField label="Nama Ibu" name="namaIbu" value={formData.namaIbu} onChange={handleInputChange} fullWidth required />
             </Grid>
-            <Grid item xs={12} md={6}>
+            <Grid item xs={12} sm={6}>
               <TextField label="Tempat/Tanggal Lahir Ibu" name="tempatTanggalLahirIbu" value={formData.tempatTanggalLahirIbu} onChange={handleInputChange} fullWidth required />
             </Grid>
             <Grid item xs={12}>
-              <TextField label="Alamat Ibu" name="alamatIbu" value={formData.alamatIbu} onChange={handleInputChange} fullWidth required />
+              <TextField multiline rows={2} label="Alamat Ibu" name="alamatIbu" value={formData.alamatIbu} onChange={handleInputChange} fullWidth required />
             </Grid>
-            <Grid item xs={12} md={6}>
+            <Grid item xs={12} sm={6}>
               <TextField label="Telepon Ibu" name="teleponIbu" value={formData.teleponIbu} onChange={handleInputChange} fullWidth required />
             </Grid>
-            <Grid item xs={12} md={6}>
+            <Grid item xs={12} sm={6}>
               <TextField label="Tempat/Tanggal Baptis Ibu" name="tempatTanggalBaptisIbu" value={formData.tempatTanggalBaptisIbu} onChange={handleInputChange} fullWidth />
             </Grid>
-            <Grid item xs={12} md={6}>
+            <Grid item xs={12} sm={6}>
               <TextField label="Pendidikan Terakhir Ibu" name="pendidikanTerakhirIbu" value={formData.pendidikanTerakhirIbu} onChange={handleInputChange} fullWidth required />
             </Grid>
-            <Grid item xs={12} md={6}>
+            <Grid item xs={12} sm={6}>
               <TextField label="Pekerjaan Ibu" name="pekerjaanIbu" value={formData.pekerjaanIbu} onChange={handleInputChange} fullWidth required />
             </Grid>
-            <Grid item xs={12} md={6}>
+            <Grid item xs={12} sm={6}>
               <TextField label="KKA Ibu" name="kkaIbu" value={formData.kkaIbu} onChange={handleInputChange} fullWidth required />
             </Grid>
-            <Grid item xs={12} md={6}>
-              <TextField label="Wilayah Ibu" name="wilayahIbu" value={formData.wilayahIbu} onChange={handleInputChange} fullWidth required />
-            </Grid>
 
-            <Grid item xs={12} md={6}>
+            <Grid item xs={12} sm={6}>
               <TextField label="Nama Anak" name="namaAnak" value={formData.namaAnak} onChange={handleInputChange} fullWidth required />
             </Grid>
-            <Grid item xs={12} md={6}>
+            <Grid item xs={12} sm={6}>
               <TextField label="Tempat/Tanggal Lahir Anak" name="tempatTanggalLahirAnak" value={formData.tempatTanggalLahirAnak} onChange={handleInputChange} fullWidth required />
             </Grid>
 
             <Grid item xs={12}>
-              <Button type="submit" variant="contained" color="primary">
+              <Button
+                type="submit"
+                variant="contained"
+                disabled={!isFormValid}
+                sx={{
+                  backgroundColor: isFormValid ? 'primary.main' : 'grey',
+                  width: '100%',
+                  height: '50px',
+                }}
+              >
                 Submit
               </Button>
             </Grid>

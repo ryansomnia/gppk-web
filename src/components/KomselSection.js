@@ -22,6 +22,7 @@ const dummyData = [
   { id: 19, name: 'Daniel', category: 'Umum', day: 'Senin', time: '19:00', leader: 'Ibu Liner S', contact: '08123456789', image: '/images/komsel ilu.jpeg', area: 'Kp. Serempet' },
   { id: 20, name: 'Menarah KSH', category: 'Umum', day: 'Senin', time: '19:00', leader: 'Bpk. Mikhael Seno W', contact: '08123456789', image: '/images/komsel ilu.jpeg', area: 'Kopem' },
   { id: 21, name: 'Elshadai', category: 'Umum', day: 'Senin', time: '19:00', leader: 'Ibu Rosalina Sihombing', contact: '08123456789', image: '/images/komsel ilu.jpeg', area: 'Cibinong' },
+  { id: 22, name: 'Israel', category: 'Lewi', day: 'Minggu', time: '13:00', leader: 'Bpk.Sabar P', contact: '08123456789', image: '/images/komsel ilu.jpeg', area: 'gereja' },
   { id: 1, name: 'DEVOUT', category: 'Youth', leader: 'Sdr Mikhael Antonio', day: 'Sabtu', time: '18:30',contact: '08123456789', image: '/images/komsel ilu.jpeg', area: 'gereja' },
   { id: 2, name: 'Movement', category: 'Youth', leader: 'Sdr. Roigen S', day: 'Kamis', time: '18:30',contact: '08123456789', image: '/images/komsel ilu.jpeg', area: 'gereja' },
   { id: 3, name: 'Kanaan', category: 'Youth', leader: 'Sdri. Novita', day: 'Selasa', time: '19:00',contact: '08123456789', image: '/images/komsel ilu.jpeg', area: 'gereja' },

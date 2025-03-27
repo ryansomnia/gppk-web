@@ -46,21 +46,24 @@ function FormPelayan() {
   }, [formData]);
 
   const isFormValid = useMemo(() => {
-    return validateForm().isValid;
-  }, [validateForm]);
+    return validateForm().isValid && formData.sudahDibaptis && formData.sudahBerkka && formData.mauIkutPembinaan;
+  }, [validateForm, formData.sudahDibaptis, formData.sudahBerkka, formData.mauIkutPembinaan]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const { isValid } = validateForm();
-    if (isValid) {
+    if (isValid && formData.sudahDibaptis && formData.sudahBerkka && formData.mauIkutPembinaan) {
       try {
-        const response = await axios.post('http://localhost:3013/cbn/v1/service/pelayan/addData', {
+        const response = await axios.post('https://api.gppkcbn.org/cbn/v1/service/pelayan/addData', {
           namaLengkap: formData.namaLengkap,
           nomorHandphone: formData.nomorHandphone,
           bidangPelayanan: formData.bidangPelayanan,
         });
+        console.log('====================================');
+        console.log(response);
+        console.log('====================================');
 
-        if (response.status === 200) {
+        if (response.status === 201) {
           Swal.fire({
             icon: 'success',
             title: 'Berhasil!',
@@ -91,6 +94,11 @@ function FormPelayan() {
       }
     } else {
       setFormErrors(validateForm().errors);
+      Swal.fire({
+        icon: 'error',
+        title: 'Gagal!',
+        text: 'Pastikan semua field diisi dan semua checkbox dicentang.',
+      });
     }
   };
 
@@ -98,7 +106,7 @@ function FormPelayan() {
     <Box sx={{ padding: 4 }}>
       <Paper elevation={3} sx={{ padding: 4 }}>
         <Typography variant="h4" gutterBottom>
-          Formulir Pendaftaran Pelayan
+           Pendaftaran Pelayan Baru
         </Typography>
 
         <form onSubmit={handleSubmit}>

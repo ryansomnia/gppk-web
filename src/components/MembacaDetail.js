@@ -80,7 +80,9 @@ const MembacaDetail = () => {
           Kembali ke Daftar Artikel
         </Link>
         <a
-          href={shareUrl}
+          href={`whatsapp://send?text=${encodeURIComponent(
+            `${article.title}\n\n${shortContent}\n\n${article.url}\n\n${window.location.href}`
+          )}`}
           data-action="share/whatsapp/share"
           target="_blank"
           rel="noopener noreferrer"

@@ -27,10 +27,10 @@ function Navbar() {
 
         {/* Navbar Links */}
         <ul className={`nav-links ${isOpen ? 'open' : ''}`}>
-          <li><Link to="/" onClick={toggleMenu}>Home</Link></li>
-          <li><Link to="/about" onClick={toggleMenu}>About Us</Link></li>
+          <li><Link to="/" onClick={toggleMenu}>Beranda</Link></li>
+          <li><Link to="/about" onClick={toggleMenu}>Tentang Kami</Link></li>
           <li><Link to="/kka" onClick={toggleMenu}>KKA (Keluarga Kerajaan Allah)</Link></li>
-          <li><Link to="/service" onClick={toggleMenu}>Pastoral Care</Link></li>
+          <li><Link to="/service" onClick={toggleMenu}>Layanan Pastoral</Link></li>
           <li><Link to="/giving" onClick={toggleMenu}>Persembahan</Link></li>
           <li><Link to="/cerdasbangsa" onClick={toggleMenu}>Sekolah Cerdas Bangsa</Link></li>
 
