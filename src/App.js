@@ -23,7 +23,7 @@ import CerdasBangsa from './pages/CerdasBangsa';
 import FormBaptisan from './components/form/FormBaptisan';
 import FormKonseling from './components/form/FormKonseling';
 import FormPenyerahanAnak from './components/form/FormPenyerahanAnak';
-import FormPeneguhanNikah from './components/form/FormPeneguhanNikah';
+import FormNikah from './components/form/FormNikah';
 import FormPelayan from './components/form/FormPelayan';
 import FormPemberkatanRumah from './components/form/FormPemberkatanRumah';
 
@@ -52,7 +52,7 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/form-jemaat" element={<FormJemaat />} />
           <Route path="/form-penyerahan-anak" element={<FormPenyerahanAnak />} />
-          <Route path="/form-peneguhan-nikah" element={<FormPeneguhanNikah />} />
+          <Route path="/form-nikah" element={<FormNikah />} />
           <Route path="/form-pelayan" element={<FormPelayan />} />
           <Route path="/form-pemberkatan-rumah" element={<FormPemberkatanRumah />} />
 

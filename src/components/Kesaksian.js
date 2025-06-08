@@ -22,30 +22,7 @@ const fetchKesaksianData = async () => {
   return response.data.data;
 };
 const Kesaksian = () => {
-  // Data kesaksian
-  // const testimonies = [
-  //   {
-  //     image: '/images/bg.jpg', // Pastikan gambar tersedia di folder public
-  //     name: 'Maria Simanjuntak',
-  //     highlight:
-  //       'Ketika saya mengalami masa sulit dalam hidup, saya menemukan kekuatan baru melalui kelompok doa.',
-  //     fullTestimony: 'Bergabung dengan kelompok doa memberikan saya komunitas yang mendukung. Tuhan bekerja luar biasa dalam hidup saya.',
-  //   },
-  //   {
-  //     image: '/images/bg1.jpg',
-  //     name: 'Johan Sitorus',
-  //     highlight:
-  //       'Doa bersama keluarga gereja telah mengubah cara pandang saya terhadap tantangan hidup.',
-  //     fullTestimony: 'Dengan doa bersama, saya merasakan damai dan kekuatan yang luar biasa setiap hari.',
-  //   },
-  //   {
-  //     image: '/images/bg2.jpg',
-  //     name: 'Debora Manurung',
-  //     highlight:
-  //       'Mendengar kesaksian orang lain menguatkan iman saya dan membawa saya lebih dekat kepada Tuhan.',
-  //     fullTestimony: 'Kini saya merasa lebih percaya diri menghadapi hidup karena saya tahu Tuhan selalu menyertai.',
-  //   },
-  // ];
+ 
   const {
     data: kesaksianData = [],
     isLoading,
@@ -91,7 +68,8 @@ const Kesaksian = () => {
             <img
               src={testimony.url}
               alt={testimony.nama}
-              className="w-full h-auto object-cover"
+              className="w-full object-cover" // Example: fixed height of 48 units (you can adjust)
+              style={{ height: '500px' }} 
             />
             <div className="p-6 text-center">
               <h3 className="text-xl font-semibold text-gray-700 mb-2">

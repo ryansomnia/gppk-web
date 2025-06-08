@@ -1,421 +1,142 @@
 import React, { useState } from 'react';
-import './FormJemaat.css';
+import { TextField, Button, Typography, Grid, Box, Paper, FormControl, InputLabel, RadioGroup, FormControlLabel, Radio } from '@mui/material';
+import axios from 'axios';
+import Swal from 'sweetalert2';
+import moment from 'moment'; // Import moment.js
 
-const FormJemaat = () => {
+function FormJemaat() {
   const [formData, setFormData] = useState({
-    nama: '',
-    jenisKelamin: '',
-    status: '',
-    tanggalLahir: '',
-    alamat: '',
-    pasFoto: null,
-    baptisan: '',
-    baptisanDate: '',
-    nohp: '',
+    full_name: '',
+    username: '',
+    tanggal_lahir: '', // Akan dalam format YYYY-MM-DD
+    tempat_lahir: '',
+    address: '',
+    phone_number: '',
+    email: '',
     pendidikan: '',
     pekerjaan: '',
     kka: '',
-    tanggalJoin: '',
-    kepercayaanLama: '',
-    jumlahAnggotaKeluarga: '',
-    familyMembers: [], // State for family members
+    statusNikah: '',
+    kepercayaan_lama: '',
+    tanggal_join: '', // Akan dalam format YYYY-MM-DD
+    baptisan_air: 'tidak', // Default 'tidak' for RadioGroup (sesuaikan jika perlu)
+    baptisan_roh: 'tidak', // Default 'tidak' for RadioGroup (sesuaikan jika perlu)
   });
 
-  const [currentStep, setCurrentStep] = useState(1);
-
-  const handleChange = (e) => {
-    const { name, value, files } = e.target;
-    setFormData({
-      ...formData,
-      [name]: files ? files[0] : value,
-    });
-  };
-
-  const handleRadioChange = (e) => {
-    setFormData({
-      ...formData,
-      baptisan: e.target.value,
-    });
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Logic for submitting form data to the backend goes here
-    console.log(formData);
-  };
-
-  const handleNext = () => {
-    setCurrentStep((prev) => prev + 1);
-  };
-
-  const handleBack = () => {
-    setCurrentStep((prev) => prev - 1);
-  };
-
-
-
-  const handleFamilyMemberChange = (index, e) => {
+  const handleInputChange = (e) => {
     const { name, value } = e.target;
-    const newFamilyMembers = [...formData.familyMembers];
-    newFamilyMembers[index] = {
-      ...newFamilyMembers[index],
-      [name]: value,
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    // Persiapkan data untuk dikirim ke backend
+    // Kirim tanggal langsung dalam format 'YYYY-MM-DD' yang sudah dihasilkan oleh input type="date"
+    const dataToSend = {
+      ...formData,
+      tanggal_lahir: formData.tanggal_lahir || null, // Kirim string YYYY-MM-DD atau null jika kosong
+      tanggal_join: formData.tanggal_join || null,   // Kirim string YYYY-MM-DD atau null jika kosong
+      // 'baptisan_air' dan 'baptisan_roh' sudah dalam string 'ya'/'tidak' yang cocok untuk VARCHAR
     };
-    setFormData({
-      ...formData,
-      familyMembers: newFamilyMembers,
-    });
+
+    try {
+      const response = await axios.post('https://api.gppkcbn.org/cbn/v1/service/jemaat/addData', dataToSend);
+
+      if (response.status === 201) {
+        Swal.fire({
+          icon: 'success',
+          title: 'Berhasil!',
+          text: 'Data pribadi jemaat berhasil ditambahkan.',
+        });
+        // Reset form setelah berhasil submit
+        setFormData({
+          full_name: '',
+          username: '',
+          tanggal_lahir: '',
+          tempat_lahir: '',
+          address: '',
+          phone_number: '',
+          email: '',
+          pendidikan: '',
+          pekerjaan: '',
+          kka: '',
+          statusNikah: '',
+          kepercayaan_lama: '',
+          tanggal_join: '',
+          baptisan_air: 'tidak',
+          baptisan_roh: 'tidak',
+        });
+      } else {
+        Swal.fire({
+          icon: 'error',
+          title: 'Gagal!',
+          text: response.data.message || 'Gagal menambahkan data. Silakan coba lagi.',
+        });
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      Swal.fire({
+        icon: 'error',
+        title: 'Gagal!',
+        text: error.response?.data?.message || 'Terjadi kesalahan. Silakan coba lagi.',
+      });
+    }
   };
 
-  const handleFamilyMemberCountChange = (e) => {
-    const count = parseInt(e.target.value, 10) || 0;
-    const newFamilyMembers = Array.from({ length: count }, (_, i) => ({
-      nama: '',
-      hubungan: '',
-    }));
-    setFormData({
-      ...formData,
-      jumlahAnggotaKeluarga: count,
-      familyMembers: newFamilyMembers,
-    });
-  };
   return (
-    <div className="jemaat-form-container">
-      <h2>Form Daftar Kartu Jemaat</h2>
-      <form className="jemaat-form" onSubmit={handleSubmit}>
-        {currentStep === 1 && (
-          <>
-            <div className="form-row full-width">
-              <label htmlFor="nama">Nama:</label>
-              <input
-                type="text"
-                id="nama"
-                name="nama"
-                value={formData.nama}
-                onChange={handleChange}
-                required
-              />
-            </div>
-            <div className="form-row">
-              <label htmlFor="tanggalLahir">Tanggal Lahir:</label>
-              <input
-                type="date"
-                id="tanggalLahir"
-                name="tanggalLahir"
-                value={formData.tanggalLahir}
-                onChange={handleChange}
-                required
-              />
-            </div>
-            <div className="form-row">
-              <label htmlFor="nohp">No Handphone:</label>
-              <input
-                type="text"
-                id="nohp"
-                name="nohp"
-                value={formData.nohp}
-                onChange={handleChange}
-                required
-              />
-            </div>
-            <div className="form-row full-width">
-              <label htmlFor="alamat">Alamat:</label>
-              <textarea
-                id="alamat"
-                name="alamat"
-                value={formData.alamat}
-                onChange={handleChange}
-                required
-              />
-            </div>
-            <div className="form-row">
-              <label htmlFor="pendidikan">Pendidikan Terakhir:</label>
-              <input
-                type="text"
-                id="pendidikan"
-                name="pendidikan"
-                value={formData.pendidikan}
-                onChange={handleChange}
-                required
-              />
-            </div>
-            <div className="form-row">
-              <label htmlFor="pekerjaan">Pekerjaan:</label>
-              <input
-                type="text"
-                id="pekerjaan"
-                name="pekerjaan"
-                value={formData.pekerjaan}
-                onChange={handleChange}
-                required
-              />
-            </div>
-            <div className="form-row">
-              <label htmlFor="kka">KKA:</label>
-              <input
-                type="text"
-                id="kka"
-                name="kka"
-                value={formData.kka}
-                onChange={handleChange}
-                required
-              />
-            </div>
-            <div className="form-row">
-              <label htmlFor="status">Status Perkawinan:</label>
-              <select
-                id="status"
-                name="status"
-                value={formData.status}
-                onChange={handleChange}
-                required
-              >
-                <option value="">-- Pilih Status --</option>
-                <option value="Belum Menikah">Belum Menikah</option>
-                <option value="Menikah">Menikah</option>
-                <option value="Duda/Janda">Duda/Janda</option>
-              </select>
-            </div>
-            <div className="form-row">
-              <label htmlFor="tanggalJoin">Tanggal Bergabung dengan GPPK:</label>
-              <input
-                type="month"
-                id="tanggalJoin"
-                name="tanggalJoin"
-                value={formData.tanggalJoin}
-                onChange={handleChange}
-                required
-              />
-            </div>
-            <div className="form-row">
-              <label htmlFor="kepercayaanLama">Kepercayaan Lama:</label>
-              <select
-                id="kepercayaanLama"
-                name="kepercayaanLama"
-                value={formData.kepercayaanLama}
-                onChange={handleChange}
-                required
-              >
-                <option value="">-- Pilih --</option>
-                <option value="Islam">Islam</option>
-                <option value="Budha">Budha</option>
-                <option value="Hindu">Hindu</option>
-                <option value="Katholik">Katholik</option>
-                <option value="Konghuchu">Konghuchu</option>
-                <option value="lainLain">Lain-lain</option>
-              </select>
-            </div>
-            <div className="form-row full-width">
-              <label>Baptisan:</label>
-              <div className="radio-group">
-                <label>
-                  <input
-                    type="radio"
-                    value="option1"
-                    checked={formData.baptisan === 'option1'}
-                    onChange={handleRadioChange}
-                  />
-                  Baptisan Anak
-                </label>
-                <label>
-                  <input
-                    type="radio"
-                    value="option2"
-                    checked={formData.baptisan === 'option2'}
-                    onChange={handleRadioChange}
-                  />
-                  Baptisan Dewasa
-                </label>
-                <label>
-                  <input
-                    type="radio"
-                    value="option3"
-                    checked={formData.baptisan === 'option3'}
-                    onChange={handleRadioChange}
-                  />
-                  Belum Dibaptis
-                </label>
-              </div>
-              <label>Tanggal Baptis:</label>
-              <input
-                type="date"
-                id="baptisanDate"
-                name="baptisanDate"
-                value={formData.baptisanDate}
-                onChange={handleChange}
-                required
-              />
-            </div>
-            <button type="button" onClick={handleNext} className="submit-btn full-width">Next</button>
-          </>
-        )}
-        
-        {currentStep === 2 && (
-          <div>
-            {/* Add your additional questions here */}
-            <div className="form-row">
-              <label htmlFor="additionalQuestion1">Sudahkah saudara terlibat dalam pelayanan di GPPK CBN? :</label>
-              <input
-                type="text"
-                id="additionalQuestion1"
-                name="additionalQuestion1"
-                onChange={handleChange}
-                required
-              />
-            </div>
-            <div className="form-row">
-              <label htmlFor="additionalQuestion2">Bila sudah, dalam bidang apa saudara melayani? :</label>
-              <input
-                type="text"
-                id="additionalQuestion2"
-                name="additionalQuestion2"
-                onChange={handleChange}
-                required
-              />
-            </div>
-            <div className="form-row">
-              <label htmlFor="additionalQuestion2">Sebelumnya apakah saudara pernah terlibat dalam pelayanan di Gereja lain? :</label>
-              <input
-                type="text"
-                id="additionalQuestion2"
-                name="additionalQuestion2"
-                onChange={handleChange}
-                required
-              />
-            </div>
-            <div className="form-row">
-              <label htmlFor="additionalQuestion2">Bila pernah, dalam bidang apa saudara melayani? :</label>
-              <input
-                type="text"
-                id="additionalQuestion2"
-                name="additionalQuestion2"
-                onChange={handleChange}
-                required
-              />
-            </div>
+    <Box sx={{ padding: 4 }}>
+      <Paper elevation={3} sx={{ padding: 4 }}>
+        <Typography variant="h4" gutterBottom>
+          Formulir Kartu Jemaat
+        </Typography>
 
-            <div className="form-row">
-              <label htmlFor="additionalQuestion2">Dimana saudara pernah melayani? :</label>
-              <input
-                type="text"
-                id="additionalQuestion2"
-                name="additionalQuestion2"
-                onChange={handleChange}
-                required
-              />
-            </div>
-            <div className="form-row">
-              <label htmlFor="additionalQuestion2">Apakah saudara sudah menjadi jemaat tetap yang berkomitmen di GPPK CBN :</label>
-              <input
-                type="text"
-                id="additionalQuestion2"
-                name="additionalQuestion2"
-                onChange={handleChange}
-                required
-              />
-            </div>
-            {/* More additional questions can be added similarly */}
-            <button type="button" onClick={handleBack} className="submit-btn">Back</button>
-            <button type="button" onClick={handleNext} className="submit-btn">Next</button>
-            </div>
-        )}
+        <form onSubmit={handleSubmit}>
+          <Grid container spacing={3}>
+            <Grid item xs={12} md={6}>
+              <TextField label="Nama Lengkap" name="full_name" value={formData.full_name} onChange={handleInputChange} fullWidth required margin="normal" />
+              <TextField label="Username" name="username" value={formData.username} onChange={handleInputChange} fullWidth required margin="normal" />
+              <TextField label="Tempat Lahir" name="tempat_lahir" value={formData.tempat_lahir} onChange={handleInputChange} fullWidth required margin="normal" />
+              <TextField label="Tanggal Lahir" name="tanggal_lahir" type="date" value={formData.tanggal_lahir} onChange={handleInputChange} InputLabelProps={{ shrink: true }} fullWidth required margin="normal" />
+              <TextField label="Alamat" name="address" value={formData.address} onChange={handleInputChange} fullWidth required margin="normal" multiline rows={3} />
+              <TextField label="Nomor Telepon" name="phone_number" value={formData.phone_number} onChange={handleInputChange} fullWidth required margin="normal" />
+              <TextField label="Email" name="email" type="email" value={formData.email} onChange={handleInputChange} fullWidth required margin="normal" />
+            </Grid>
 
-{currentStep === 3 && (
-          <div>
-            <h3>Data Keluarga</h3>
-            <div className="form-row">
-              <label htmlFor="jumlahAnggotaKeluarga">Jumlah Anggota Keluarga:</label>
-              <input
-                type="number"
-                id="jumlahAnggotaKeluarga"
-                name="jumlahAnggotaKeluarga"
-                value={formData.jumlahAnggotaKeluarga}
-                onChange={handleFamilyMemberCountChange}
-                required
-              />
-            </div>
-            {formData.familyMembers.length > 0 && (
-              <table className="family-member-table">
-                <thead>
-                  <tr>
-                    <th>Nama</th>
-                    <th>Hubungan</th>
-                    <th>Status Pernikahan</th>
-                    <th>Usia</th>
-                    <th>Agama</th>
-                    <th>Sudah Dibaptis</th>
+            <Grid item xs={12} md={6}>
+              <TextField label="Pendidikan Terakhir" name="pendidikan" value={formData.pendidikan} onChange={handleInputChange} fullWidth margin="normal" />
+              <TextField label="Pekerjaan" name="pekerjaan" value={formData.pekerjaan} onChange={handleInputChange} fullWidth margin="normal" />
+              <TextField label="KKA" name="kka" value={formData.kka} onChange={handleInputChange} fullWidth margin="normal" />
+              <TextField label="Status Nikah" name="statusNikah" value={formData.statusNikah} onChange={handleInputChange} fullWidth margin="normal" />
+              <TextField label="Kepercayaan Lama" name="kepercayaan_lama" value={formData.kepercayaan_lama} onChange={handleInputChange} fullWidth margin="normal" />
+              <TextField label="Tanggal Bergabung" name="tanggal_join" type="date" value={formData.tanggal_join} onChange={handleInputChange} InputLabelProps={{ shrink: true }} fullWidth required margin="normal" />
+              
+              <FormControl component="fieldset" margin="normal" fullWidth>
+                <InputLabel component="legend" shrink>Baptisan Air?</InputLabel>
+                <RadioGroup row name="baptisan_air" value={formData.baptisan_air} onChange={handleInputChange}>
+                  <FormControlLabel value="ya" control={<Radio />} label="Ya" />
+                  <FormControlLabel value="tidak" control={<Radio />} label="Tidak" />
+                </RadioGroup>
+              </FormControl>
 
-                  </tr>
-                </thead>
-                <tbody>
-                  {formData.familyMembers.map((member, index) => (
-                    <tr key={index}>
-                      <td>
-                        <input
-                          type="text"
-                          name="nama"
-                          value={member.nama}
-                          onChange={(e) => handleFamilyMemberChange(index, e)}
-                          required
-                        />
-                      </td>
-                      <td>
-                        <input
-                          type="text"
-                          name="hubungan"
-                          value={member.hubungan}
-                          onChange={(e) => handleFamilyMemberChange(index, e)}
-                          required
-                        />
-                      </td>
-                      <td>
-                        <input
-                          type="text"
-                          name="hubungan"
-                          value={member.status}
-                          onChange={(e) => handleFamilyMemberChange(index, e)}
-                          required
-                        />
-                      </td>
-                      <td>
-                        <input
-                          type="text"
-                          name="hubungan"
-                          value={member.usia}
-                          onChange={(e) => handleFamilyMemberChange(index, e)}
-                          required
-                        />
-                      </td>
-                      <td>
-                        <input
-                          type="text"
-                          name="hubungan"
-                          value={member.agama}
-                          onChange={(e) => handleFamilyMemberChange(index, e)}
-                          required
-                        />
-                      </td>
-                      <td>
-                        <input
-                          type="text"
-                          name="hubungan"
-                          value={member.baptis}
-                          onChange={(e) => handleFamilyMemberChange(index, e)}
-                          required
-                        />
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            )}
-            <button type="button" onClick={handleBack} className="submit-btn">Back</button>
-            <button type="submit" className="submit-btn">Submit</button>
-          </div>
-        )}
-      </form>
-    </div>
+              <FormControl component="fieldset" margin="normal" fullWidth>
+                <InputLabel component="legend" shrink>Baptisan Roh?</InputLabel>
+                <RadioGroup row name="baptisan_roh" value={formData.baptisan_roh} onChange={handleInputChange}>
+                  <FormControlLabel value="ya" control={<Radio />} label="Ya" />
+                  <FormControlLabel value="tidak" control={<Radio />} label="Tidak" />
+                </RadioGroup>
+              </FormControl>
+            </Grid>
+
+            <Grid item xs={12}>
+              <Button type="submit" variant="contained" color="primary" fullWidth>
+                Tambah Data Jemaat
+              </Button>
+            </Grid>
+          </Grid>
+        </form>
+      </Paper>
+    </Box>
   );
-};
-
+}
 export default FormJemaat;

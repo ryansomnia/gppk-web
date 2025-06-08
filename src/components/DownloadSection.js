@@ -85,13 +85,7 @@ const DownloadSection = () => {
     fetchAllMateri();
   }, []);
  
-  const today = new Date();
-  const formattedDate = today.toLocaleDateString("id-ID", {
-    weekday: "long",
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  });
+
 
   return (
     <div className="flex flex-col items-center w-full py-20 shadow-sm rounded-lg text-center mb-10 px-6">
@@ -100,7 +94,7 @@ const DownloadSection = () => {
       <h3 className="text-gray-500 text-xl md:text-lg">
         {materi.judulMateri ? `Tema: "${materi.judulMateri}"` : "Loading..."}
       </h3>
-      <p className="text-sm md:text-lg text-gray-500 mb-6">Tanggal: {formattedDate}</p>
+      <p className="text-sm md:text-lg text-gray-500 mb-6">Tanggal: {moment(materi.waktuPembuatan).format('DD-MM-YYYY')}</p>
       {materi.url ? (
         <a
           href={materi.url}
