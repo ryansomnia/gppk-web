@@ -1,9 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import './ParallaxSection.css';
 const images = [
-  '/images/bg.jpg',
-  '/images/bg1.JPG',
-  '/images/bg2.JPG'
+  '/images/bg1.webp',
+  '/images/bg2.webp',
+  '/images/bg3.jpg',
+  '/images/bg4.jpg',
+  '/images/bg5.webp',
+'/images/bg6.webp',
+'/images/bg7.webp',
+'/images/bg8.webp',
+'/images/bg9.webp',
+'/images/bg10.webp',
+'/images/bg11.webp',
+'/images/bg12.webp'
+
 ];
 
 function ParallaxSection() {
