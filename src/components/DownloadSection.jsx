@@ -48,6 +48,13 @@ const DownloadSection = () => {
       </section>
     );
   }
+  if (!loading && !featuredMateri) {
+    return (
+      <section className="py-20 text-center">
+        <p>Belum ada materi tersedia.</p>
+      </section>
+    );
+  }
   return (
     <section style={{ padding: '0 1rem', fontFamily: "Georgia,'Times New Roman',serif" }}>
       <style>{`
@@ -121,7 +128,7 @@ const DownloadSection = () => {
                   </svg>
                   <span style={{ fontFamily: "'Helvetica Neue',Arial,sans-serif", fontSize: '10px', fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase', color: '#c9a84c' }}>Arsip Materi</span>
                 </div>
-                <span style={{ fontFamily: "'Helvetica Neue',Arial,sans-serif", fontSize: '11px', color: 'rgba(240,236,227,0.3)' }}>{demoAll.length} dokumen</span>
+                <span style={{ fontFamily: "'Helvetica Neue',Arial,sans-serif", fontSize: '11px', color: 'rgba(240,236,227,0.3)' }}>{allMateri.length + (materi ? 1 : 0)} dokumen</span>
               </div>
               <div style={{ height: '1px', background: 'rgba(201,168,76,0.2)', marginBottom: '0.5rem' }} />
 
@@ -151,7 +158,7 @@ const DownloadSection = () => {
                         </svg>
                       </div>
                     </a>
-                    {idx < demoAll.length - 1 && <div style={{ height: '1px', background: 'rgba(255,255,255,0.04)', margin: '0 0.875rem' }} />}
+                    {idx < archiveMateri.length - 1 && <div style={{ height: '1px', background: 'rgba(255,255,255,0.04)', margin: '0 0.875rem' }} />}
                   </div>
                 ))}
               </div>
