@@ -1,33 +1,53 @@
-import React, { useState, useEffect } from 'react';
-import moment from 'moment';
-import 'moment/locale/id';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import moment from "moment";
+import "moment/locale/id";
 
-moment.locale('id');
+moment.locale("id");
 
 const DownloadSection = () => {
   const [materi, setMateri] = useState(null);
   const [allMateri, setAllMateri] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // const fetchData = async () => { ... }
-    // fetchData();
+    fetchMateri();
   }, []);
 
-  const demoMateri = materi || {
-    judulMateri: 'Hidup dalam Kepenuhan Roh Kudus',
-    waktuPembuatan: '2025-05-10',
-    url: '#',
-    deskripsi: 'Seri pengajaran tentang bagaimana kita dapat hidup sepenuhnya dipimpin oleh Roh Kudus dalam kehidupan sehari-hari.',
+  const fetchMateri = async () => {
+    try {
+      const res = await axios.get(
+        "https://api.gppkcbn.org/cbn/v1/artikel/bahanKKA"
+      );
+
+      const data = res.data.data || [];
+
+      if (data.length > 0) {
+        const sortedData = data.sort(
+          (a, b) =>
+            new Date(b.waktuPembuatan) -
+            new Date(a.waktuPembuatan)
+        );
+        
+        setMateri(sortedData[0]);
+        setAllMateri(sortedData.slice(1));
+      }
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
   };
+  const featuredMateri = materi;
 
-  const demoAll = allMateri.length > 0 ? allMateri : [
-    { judulMateri: 'Iman yang Menggerakkan Gunung', waktuPembuatan: '2025-04-01', url: '#' },
-    { judulMateri: 'Berjalan dalam Kasih Karunia', waktuPembuatan: '2025-03-01', url: '#' },
-    { judulMateri: 'Doa yang Mengubah Segala Sesuatu', waktuPembuatan: '2025-02-01', url: '#' },
-    { judulMateri: 'Menemukan Panggilan Ilahi', waktuPembuatan: '2025-01-01', url: '#' },
-    { judulMateri: 'Kebenaran yang Memerdekakan', waktuPembuatan: '2024-12-01', url: '#' },
-  ];
-
+  const archiveMateri = allMateri;
+  if (loading) {
+    return (
+      <section className="py-20 text-center">
+        <p>Memuat materi KKA...</p>
+      </section>
+    );
+  }
   return (
     <section style={{ padding: '0 1rem', fontFamily: "Georgia,'Times New Roman',serif" }}>
       <style>{`
@@ -63,17 +83,29 @@ const DownloadSection = () => {
 
               <div style={{ fontSize: '80px', lineHeight: 1, color: '#c9a84c', opacity: 0.1, marginBottom: '-1.25rem' }}>"</div>
               <h3 style={{ fontSize: 'clamp(1.3rem,2.5vw,2rem)', fontWeight: 700, lineHeight: 1.2, color: '#f0ece3', margin: '0 0 1rem', letterSpacing: '-0.01em' }}>
-                {demoMateri.judulMateri}
+                {featuredMateri?.judulMateri}
               </h3>
               <p style={{ fontFamily: "'Helvetica Neue',Arial,sans-serif", fontSize: '13px', lineHeight: 1.8, color: 'rgba(240,236,227,0.45)', margin: '0 0 0.5rem' }}>
-                {demoMateri.deskripsi}
+              Materi Komunitas Kelompok Akrab (KKA) yang dapat diunduh dan dipelajari bersama untuk pertumbuhan iman dan kehidupan rohani.
               </p>
               <p style={{ fontFamily: "'Helvetica Neue',Arial,sans-serif", fontSize: '11px', letterSpacing: '0.05em', color: '#c9a84c', opacity: 0.65, margin: '0 0 2rem' }}>
-                {moment(demoMateri.waktuPembuatan).format('DD MMMM YYYY')}
+                {moment(featuredMateri?.waktuPembuatan).format('DD MMMM YYYY')}
               </p>
 
-              <a href={demoMateri.url} download style={{ textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '10px', padding: '0.875rem 1.75rem', background: '#c9a84c', borderRadius: '100px' }}>
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0f1923" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <a
+  href={featuredMateri?.url}
+  target="_blank"
+  rel="noopener noreferrer"
+  style={{
+    textDecoration: "none",
+    display: "inline-flex",
+    alignItems: "center",
+    gap: "10px",
+    padding: "0.875rem 1.75rem",
+    background: "#c9a84c",
+    borderRadius: "100px"
+  }}
+>                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0f1923" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
                 </svg>
                 <span style={{ fontFamily: "'Helvetica Neue',Arial,sans-serif", fontSize: '12px', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#0f1923' }}>Download Materi</span>
@@ -94,10 +126,17 @@ const DownloadSection = () => {
               <div style={{ height: '1px', background: 'rgba(201,168,76,0.2)', marginBottom: '0.5rem' }} />
 
               <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
-                {demoAll.map((item, idx) => (
-                  <div key={idx}>
-                    <a href={item.url} download style={{ textDecoration: 'none', display: 'block' }}>
-                      <div
+              {archiveMateri.map((item, idx) => (
+                                  <div key={idx}>
+<a
+  href={item.url}
+  target="_blank"
+  rel="noopener noreferrer"
+  style={{
+    textDecoration: "none",
+    display: "block"
+  }}
+>                      <div
                         style={{ display: 'flex', alignItems: 'center', gap: '0.875rem', padding: '0.75rem 0.875rem', borderRadius: '0.625rem', cursor: 'pointer', transition: 'background 0.2s' }}
                         onMouseEnter={(e) => { e.currentTarget.style.background = 'rgba(201,168,76,0.06)'; }}
                         onMouseLeave={(e) => { e.currentTarget.style.background = 'transparent'; }}
